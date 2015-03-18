@@ -1,0 +1,2 @@
+//import data.json into mongodb to start hacking on it
+mongoimport --db rsod --collection baltimore --type json --file baltimore.json --jsonArray

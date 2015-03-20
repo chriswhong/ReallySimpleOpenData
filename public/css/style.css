@@ -74,3 +74,19 @@ body {
 .tags a:hover{background:#555;} 
 
 .tags a:hover:before{border-color:transparent #555 transparent transparent;}
+
+#query {
+  height:55px;
+  font-size:2em;
+}
+
+.glyphicon-search {
+  height: 40px;
+  width: 40px;
+  font-size: 30px;
+  padding-top: 6px;
+}
+
+.sidebar {
+  border-right: 3px solid #F2F2F2;
+}

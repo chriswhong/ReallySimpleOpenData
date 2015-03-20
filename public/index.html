@@ -19,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">Really Simple Open Data</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -48,14 +48,35 @@
       </div>
     </nav>
 
-    <div class = "container">
+    <div class = "container" ng-controller="mainController">
       <div class="row">
-        <div class="col-md-3">
-          Sidebar
+        <div class="col-md-3 sidebar">
+          <h2>Sidebar</h2>
+          <h2>Categories</h2>
+          
+          <div ng-repeat="dataset in datasets | unique: 'theme'">
+            {{dataset.theme[0]}}
+          </div>
+
+          <h2>Tags</h2>
+          <div ng-repeat="tag in datasets | uniqueTags">
+            {{tag}}
+          </div>
+
+         
         </div>
-        <div class="col-md-9" ng-controller="mainController">
-          <h1>Datasets</h1>
-          <div class = "col-md-12 catalogItem" ng-repeat="dataset in datasets">
+        <div class="col-md-9">
+          
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Datasets" id="query" name="query" value="" ng-model="query">
+              <div class="input-group-btn">
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+          </div>
+          <div class = "col-md-12">
+            <h2>{{filtered.length}} datasets found</h2>
+          </div>
+          <div class = "col-md-12 catalogItem" ng-repeat="dataset in filtered = (datasets | filter:query)">
             <h3>{{dataset.title}}</h3>
             <p>{{dataset.description}}</p>
             <ul class="tags">
@@ -72,6 +93,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.6/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.4/angular-filter.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

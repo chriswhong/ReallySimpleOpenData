@@ -1,6 +1,6 @@
-var myApp = angular.module('spicyApp1', []);
+var myApp = angular.module('mainApp', []);
 
-myApp.controller('SpicyController', ['$scope', '$http', function($scope, $http) {
+myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
     $http.get('/data.json').
       success(function(data, status, headers, config) {
         $scope.datasets = data;

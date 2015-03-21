@@ -68,17 +68,29 @@
         <div class="col-md-9">
           
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search Datasets" id="query" name="query" value="" ng-model="query">
+            <input type="text" class="form-control" placeholder="Search Datasets" ng-model="searchString" ng-enter="updateQuery()">
               <div class="input-group-btn">
             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
             </div>
           </div>
           <div class = "col-md-12">
-            <h2>{{filtered.length}} datasets found</h2>
+            <div class="col-md-6">
+              <h2>{{filtered.length}} datasets found</h2> 
+            </div>
+            <div class="col-md-6">
+              <h4>Sort By: </h4><select class="form-control" ng-model="sortBy">
+              <option selected="selected" value="+title" selected="selected">Title Ascending</option>
+              <option value="-title">Title Descending</option>
+            </select>
+            </div>
+
+            
           </div>
-          <div class = "col-md-12 catalogItem" ng-repeat="dataset in filtered = (datasets | filter:query)">
+          <div class = "col-md-12 catalogItem" ng-repeat="dataset in filtered = (datasets | filter:mainFilter | orderBy:sortBy)">
             <h3>{{dataset.title}}</h3>
             <p>{{dataset.description}}</p>
+            <p>Created: {{dataset.issued}}</p>
+            <p>Updated: {{dataset.modified}}</p>
             <ul class="tags">
               <li ng-repeat="tag in dataset.keyword"> 
                 <a href="#">{{tag}}</a>

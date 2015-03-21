@@ -54,7 +54,7 @@
           <h2>Sidebar</h2>
           <h2>Categories</h2>
           
-          <div ng-repeat="dataset in datasets | unique: 'theme'">
+          <div ng-repeat="dataset in datasets | unique: 'theme'" ng-click="setCategory(dataset.theme[0])">
             {{dataset.theme[0]}}
           </div>
 

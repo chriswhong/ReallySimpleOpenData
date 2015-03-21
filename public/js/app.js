@@ -3,7 +3,8 @@ var myApp = angular.module('mainApp', ['angular.filter']);
 myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
     //set the default sort
     $scope.sortBy = '+title';
-    $scope.searchString = '';  
+    //$scope.searchString = false;
+    $scope.category = false;
 
     //get data.json
     $http.get('/data.json').
@@ -11,22 +12,44 @@ myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
         $scope.datasets = data;
       });
 
-    // $scope.updateQuery = function() {
-    //   console.log('updateQuery Ran!');
-    //   $scope.query = {
-    //     title: $scope.searchString,
-    //     description: $scope.searchString
-    //   }
+    $scope.updateQuery = function() {
+      console.log('updateQuery Ran!');
+      $scope.query = {
+        title: $scope.searchString,
+        description: $scope.searchString
+      }
 
-    //   console.log($scope.query);
-    // }
+      console.log($scope.query);
+    }
 
     $scope.mainFilter = function(dataset) {
-      console.log('mainfilter');
+      console.log(dataset);
+
       
-      return dataset.title.match(new RegExp($scope.searchString,'i')) ||
-        dataset.description.match(new RegExp($scope.searchString,'i'));
+      var category=true,
+        search=true;
+
+      //first filter by category if there is one selected
+      if(dataset.theme && $scope.category) {
+        category = dataset.theme[0] == $scope.category;
+      }
+
+      console.log(category);
+
+      //then filter title and description based on the search box
+      if($scope.searchString) {
+        search = dataset.title.match(new RegExp($scope.searchString,'i')) ||
+          dataset.description.match(new RegExp($scope.searchString,'i')) 
+      }
+
+      return (category && search);
       
+        
+      
+    }
+
+    $scope.setCategory = function(category) {
+      $scope.category = category;
     }
 
 }]);

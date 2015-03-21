@@ -1,2 +1,8 @@
 //import data.json into mongodb to start hacking on it
 mongoimport --db rsod --collection baltimore --type json --file baltimore.json --jsonArray
+
+//export baltimore data
+mongoexport -d rsod -c baltimore -o baltimore.json
+
+//import baltimore data 
+mongoimport -h ds031631.mongolab.com:31631 -d heroku_app35101255 -c baltimore -u admin -p <password> -file baltimoreExport.json

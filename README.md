@@ -1,5 +1,6 @@
 # ReallySimpleOpenData (RSOD)
-A no-frills open data portal built with node, express, mongodb and angular
+A no-frills open data portal built with node, express, mongodb and angular.  
+Development site is live at [http://rsod.herokuapp.com](http://rsod.herokuapp.com)
 
 ## Key Tenets
 - You don't need expensive or complicated software to have an Open Data Portal

@@ -8,6 +8,10 @@ body {
   border-right: 3px solid #F2F2F2;
 }
 
+.category {
+  cursor:pointer;
+}
+
 .badge {
   background-color: #0089E0;
 }
@@ -54,6 +58,16 @@ body {
   border-bottom: 3px solid #F2F2F2;
 }
 
+.getData {
+  background: #D6D6D6;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding-bottom: 12px;
+}
+
+.getData button {
+  margin-bottom: 6px;
+}
 
 
 /*Pure CSS Post Tags from http://cssglobe.com/pure-css3-post-tags*/

@@ -53,7 +53,7 @@
           
           <h4>Categories</h4>
           
-          <div ng-repeat="category in categories" ng-click="setCategory(category.name)">
+          <div class="category" ng-repeat="category in categories" ng-click="setCategory(category.name)">
             {{category.name}} <span class="badge">{{category.count}}</span>
           </div>
 
@@ -90,14 +90,23 @@
             
           </div>
           <div class = "col-md-12 catalogItem" ng-repeat="dataset in filtered = (datasets | filter:mainFilter | orderBy:sortBy)">
-            <h4>{{dataset.title}}</h4>
-            <p>{{dataset.description}}</p>
-            <p><strong>Created:</strong> {{dataset.issued}} <strong>Updated:</strong> {{dataset.modified}}</p>
-            <ul class="tags">
-              <li ng-repeat="tag in dataset.keyword"> 
-                <a href="#">{{tag}}</a>
-              </li>
-            <ul>
+            <div class="col-md-9">
+              <h4>{{dataset.title}}</h4>
+              <p>{{dataset.description}}</p>
+              <p><strong>Created:</strong> {{dataset.issued}} <strong>Updated:</strong> {{dataset.modified}}</p>
+              <ul class="tags">
+                <li ng-repeat="tag in dataset.keyword"> 
+                  <a href="#">{{tag}}</a>
+                </li>
+              <ul>
+            </div>
+            <div class="col-md-3 getData">
+              <h5>Downloads</h5>
+              <div ng-repeat="obj in dataset.distribution">
+                <a href = "{{obj.downloadURL}}"><button type="button" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> {{obj.mediaType}}</button></a>
+              </div>
+              
+            </div>
           </div>
         </div>
       </div>

@@ -10,10 +10,36 @@ myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
     $http.get('/data.json').
       success(function(data, status, headers, config) {
         $scope.datasets = data;
+        $scope.categories = $scope.getCategories(data);
       });
 
+    $scope.getCategories = function(datasets) {
+      var categories = {};
+        var count = 0;
+        angular.forEach(datasets, function(obj, key) {
+            console.log(count+=1);
+            console.log(obj.title);
+            console.log(obj);
+            angular.forEach(obj.theme, function(value) {
+                console.log(value);
+                categories[value] ? categories[value]+=1 : categories[value]=1;
+            })
+        });
+        console.log(categories);
+        var uniqueCategories = [];
+        for (var key in categories) {
+            uniqueCategories.push({
+              name:key,
+              count:categories[key]
+            });
+        }
+
+         console.log(uniqueCategories);
+        return uniqueCategories;
+    };
+
     $scope.updateQuery = function() {
-      console.log('updateQuery Ran!');
+      //console.log('updateQuery Ran!');
       $scope.query = {
         title: $scope.searchString,
         description: $scope.searchString
@@ -23,7 +49,7 @@ myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
     }
 
     $scope.mainFilter = function(dataset) {
-      console.log(dataset);
+      //console.log(dataset);
 
       
       var category=true,
@@ -34,7 +60,7 @@ myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
         category = dataset.theme[0] == $scope.category;
       }
 
-      console.log(category);
+      //console.log(category);
 
       //then filter title and description based on the search box
       if($scope.searchString) {
@@ -70,6 +96,26 @@ myApp.filter('uniqueTags', function() {
 
         // console.log(uniqueTags);
         return uniqueTags;
+    }
+});
+
+//generates an array of unique categories for display in the sidebar
+myApp.filter('uniqueCategories', function() {
+    return function(datasets) {
+        var categories = {};
+        angular.forEach(datasets, function(obj, key) {
+            angular.forEach(obj.theme, function(value) {
+                categories[value] ? categories[value]+=1 : categories[value]=1;
+            })
+        });
+        console.log(categories);
+        var uniqueCategories = [];
+        for (var key in categories) {
+            uniqueCategories.push(key);
+        }
+
+         console.log(uniqueCategories);
+        return uniqueCategories;
     }
 });
 

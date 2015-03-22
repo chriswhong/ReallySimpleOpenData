@@ -10,7 +10,7 @@
 </head>
 <body ng-app="mainApp">
 <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -23,7 +23,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <!-- <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
@@ -37,28 +37,31 @@
                 <li><a href="#">Separated link</a></li>
                 <li><a href="#">One more separated link</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+            <li><a href="../navbar/">Admin</a></li>
+            <!-- <li><a href="../navbar-static-top/">Static top</a></li>
+            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> -->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
     <div class = "container" ng-controller="mainController">
       <div class="row">
         <div class="col-md-3 sidebar">
-          <h2>Sidebar</h2>
-          <h2>Categories</h2>
           
-          <div ng-repeat="dataset in datasets | unique: 'theme'" ng-click="setCategory(dataset.theme[0])">
-            {{dataset.theme[0]}}
+          <h4>Categories</h4>
+          
+          <div ng-repeat="category in categories" ng-click="setCategory(category.name)">
+            {{category.name}} <span class="badge">{{category.count}}</span>
           </div>
 
-          <h2>Tags</h2>
+          <!-- <div ng-repeat="dataset in datasets | unique: 'theme'" ng-click="setCategory(dataset.theme[0])">
+            {{dataset.theme[0]}}
+          </div> -->
+
+          <h4>Tags</h4>
           <div ng-repeat="tag in datasets | uniqueTags">
             {{tag}}
           </div>
@@ -68,17 +71,17 @@
         <div class="col-md-9">
           
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search Datasets" ng-model="searchString" ng-enter="updateQuery()">
+            <input type="text" id="query" class="form-control" placeholder="Search Datasets" ng-model="searchString" ng-enter="updateQuery()">
               <div class="input-group-btn">
             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
             </div>
           </div>
           <div class = "col-md-12">
-            <div class="col-md-6">
-              <h2>{{filtered.length}} datasets found</h2> 
+            <div class="col-md-6 found">
+              <h3>{{filtered.length}} datasets found</h3> 
             </div>
-            <div class="col-md-6">
-              <h4>Sort By: </h4><select class="form-control" ng-model="sortBy">
+            <div class="col-md-6 sort">
+              <h5>Sort By: </h5><select class="form-control" ng-model="sortBy">
               <option selected="selected" value="+title" selected="selected">Title Ascending</option>
               <option value="-title">Title Descending</option>
             </select>
@@ -87,10 +90,9 @@
             
           </div>
           <div class = "col-md-12 catalogItem" ng-repeat="dataset in filtered = (datasets | filter:mainFilter | orderBy:sortBy)">
-            <h3>{{dataset.title}}</h3>
+            <h4>{{dataset.title}}</h4>
             <p>{{dataset.description}}</p>
-            <p>Created: {{dataset.issued}}</p>
-            <p>Updated: {{dataset.modified}}</p>
+            <p><strong>Created:</strong> {{dataset.issued}} <strong>Updated:</strong> {{dataset.modified}}</p>
             <ul class="tags">
               <li ng-repeat="tag in dataset.keyword"> 
                 <a href="#">{{tag}}</a>

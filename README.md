@@ -16,6 +16,7 @@ A no-frills open data portal built with node, express, mongodb and angular
 - RSOD is a single-page app.  
 - Angular loads the entire data.json file once.  All searching & filtering are done in the browser. No server side rendering.
 - The admin can choose to upload data files to the server, or link to existing files elsewhere on the web.
+- Layout based on [CKAN](http://ckan.org/) catalog
 
 ## How to Deploy
 - Coming soon, this project is still in development.  Please feel free to contribute!

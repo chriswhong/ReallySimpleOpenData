@@ -6,12 +6,14 @@ A no-frills open data portal built with node, express, mongodb and angular
 - RSOD is just a searchable catalog.  That's it.  No mapping, charting, APIs, databases, user accounts, etc... 
 - Designed around the [data.json catalog standard](https://project-open-data.cio.gov/catalog/#machine-readable-format).  
 - Built on a modern stack - MEAN - MongoDB, Express.js, Angular.js, Node.js - Full Stack javascript FTW
+- Bootstrap 3 for a responsive-first layout
 - Developed by Civic Hackers and Open Data Enthusiasts who want to give data publishers another open source option for Open Data
 
 ## KISS
 - Catalog Data is stored in exactly the same structure as a valid data.json file in a single MongoDB collection
 - The frontend consumes a valid data.json endpoint (so it's automatically exposed for anyone who wants to consume it elsewhere)
 - Just 2 environment variables are required: a *MongoDB URI* and an *admin password*
+- RSOD is a single-page app.  
 - Angular loads the entire data.json file once.  All searching & filtering are done in the browser. No server side rendering.
 - The admin can choose to upload data files to the server, or link to existing files elsewhere on the web.
 

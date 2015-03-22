@@ -24,4 +24,4 @@ A no-frills open data portal built with node, express, mongodb and angular
 ## License 
 - This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
-![Screengrab from 3/22/2015](https://www.evernote.com/shard/s288/sh/20e054d9-7be1-45d4-ba91-1f4ef8ff9c99/0e7c0b2642bb84c54120d71d6bd03abf)
+![Screengrab from 3/22/2015](https://www.evernote.com/shard/s288/sh/20e054d9-7be1-45d4-ba91-1f4ef8ff9c99/0e7c0b2642bb84c54120d71d6bd03abf/res/361e3f67-8776-4af1-beac-323fad687799/skitch.png?resizeSmall&width=832)

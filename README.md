@@ -4,7 +4,7 @@ Development site is live at [http://rsod.herokuapp.com](http://rsod.herokuapp.co
 
 ## Key Tenets
 - You don't need expensive or complicated software to have an Open Data Portal
-- RSOD is just a searchable catalog.  That's it.  No mapping, charting, APIs, databases, user accounts, etc... 
+- RSOD is just a searchable metadata catalog.  That's it.  No mapping, charting, APIs, databases, user accounts, etc... 
 - Designed around the [data.json catalog standard](https://project-open-data.cio.gov/catalog/#machine-readable-format).  
 - Built on a modern stack - MEAN - MongoDB, Express.js, Angular.js, Node.js - Full Stack javascript FTW
 - Bootstrap 3 for a responsive-first layout

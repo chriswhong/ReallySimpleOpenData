@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   
 </head>
-<body ng-app="mainApp">
+<body ng-app="mainApp" ng-controller="mainController">
 <!-- Fixed navbar -->
     <nav class="navbar navbar-default">
       <div class="container">
@@ -39,15 +39,47 @@
               </ul>
             </li> -->
           </ul>
+        <!--   Bootstrap Dropdown Login Form from http://bootsnipp.com/snippets/featured/nav-bar-with-popup-sign-in-->
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Admin</a></li>
-            <!-- <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> -->
-          </ul>
+          <li><a href="https://github.com/chriswhong/ReallySimpleOpenData">Github</a></li>
+          <li ng-show="loggedIn" ng-click="logout()"><a href = "">Logout</a></li>
+          <li class="dropdown" ng-hide="loggedIn">
+                     <a href="http://www.jquery2dotnet.com" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+                     <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                        <li>
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form" id="login-nav"  ng-submit="processForm()">
+                                    <div class="form-group">
+                                    
+                                       <input type="text" class="form-control" id="loginUsername" placeholder="Username" required ng-model="formData.username">
+                                    </div>
+                                    <div class="form-group">
+                                   
+                                       <input type="password" class="form-control" id="loginPassword" placeholder="Password" required ng-model="formData.password">
+                                    </div>
+                                    <div class="checkbox">
+                                       <label>
+                                       <input type="checkbox"> Remember me
+                                       </label>
+                                    </div>
+                                    <div class="form-group">
+                                       <button type="submit" class="btn btn-success btn-block">Sign in</button>
+                                    </div>
+                                    <pre>
+                                      {{ formData }}
+                                    </pre>
+                                 </form>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+                  </li>
+        </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div class = "container" ng-controller="mainController">
+    <div class = "container">
       <div class="row">
         <div class="col-md-3 sidebar">
           
@@ -89,25 +121,47 @@
 
             
           </div>
-          <div class = "col-md-12 catalogItem" ng-repeat="dataset in filtered = (datasets | filter:mainFilter | orderBy:sortBy)">
-            <div class="col-md-9">
-              <h4>{{dataset.title}}</h4>
-              <p>{{dataset.description}}</p>
-              <p><strong>Created:</strong> {{dataset.issued}} <strong>Updated:</strong> {{dataset.modified}}</p>
-              <ul class="tags">
-                <li ng-repeat="tag in dataset.keyword"> 
-                  <a href="#">{{tag}}</a>
-                </li>
-              <ul>
-            </div>
-            <div class="col-md-3 getData">
-              <h5>Downloads</h5>
-              <div ng-repeat="obj in dataset.distribution">
-                <a href = "{{obj.downloadURL}}"><button type="button" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> {{obj.mediaType}}</button></a>
+          <div ng-repeat="dataset in filtered = (datasets | filter:mainFilter | orderBy:sortBy)">
+            <div class = "col-md-12 catalogItem" ng-hide = "dataset.editing">
+              <div class="col-md-9">
+                <h4>{{dataset.title}}</h4>
+                <p>{{dataset.description}}</p>
+                <p><strong>Created:</strong> {{dataset.issued}} <strong>Updated:</strong> {{dataset.modified}}</p>
+                <ul class="tags">
+                  <li ng-repeat="tag in dataset.keyword"> 
+                    <a href="#">{{tag}}</a>
+                  </li>
+                <ul>
               </div>
+              <div class="col-md-3 getData">
+                <h5>Downloads</h5>
+                <div ng-repeat="obj in dataset.distribution">
+                  <a href = "{{obj.downloadURL}}"><button type="button" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> {{obj.mediaType}}</button></a>
+                </div>
+                
+              </div>
+              <div class="col-md-12" ng-show="loggedIn" ng-click="toggleEditing(dataset)">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true" ></span> Edit dataset
+              </div>
+            </div>
+            <div class = "col-md-12 catalogItem" ng-show = "dataset.editing">
+              <div class="col-md-9">
+                Edit Mode Left
+              </div>
+              <div class="col-md-3 getData">
+                Edit Mode Right
+                
+              </div>
+              <div class="col-md-12" >
+                <a href="#" class="btn btn-sm btn-primary" ng-click="save(dataset)">Save</a>
+              </div>
+            </div>
+            <div class = "row" ng-show="loggedIn">
               
             </div>
           </div>
+          
+          
         </div>
       </div>
     </div>

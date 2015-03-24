@@ -13,6 +13,14 @@ myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
         $scope.categories = $scope.getCategories(data);
       });
 
+    //check if logged in on page load
+    $http.get('/loggedin')
+      .success(function(data, status, headers, config) {
+        if (data.success) {
+          $scope.loggedIn = true;
+        }
+      })
+
     $scope.getCategories = function(datasets) {
       var categories = {};
         var count = 0;
@@ -77,6 +85,43 @@ myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
     $scope.setCategory = function(category) {
       $scope.category = category;
     }
+
+    $scope.formData = {};
+
+    $scope.processForm = function() {
+      $http({
+        method  : 'POST',
+        url     : '/login',
+        data    : $.param($scope.formData),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+      })
+      .success(function(data) {
+        (data.success) ? $scope.loggedIn = true : $scope.loggedIn = false;
+        console.log($scope.loggedIn);
+      });
+    };
+
+    $scope.logout = function() {
+      $http.get('/logout')
+        .success(function(data, status, headers, config) {
+          $scope.loggedIn = false;
+          console.log($scope.loggedIn);
+        })
+    };
+
+    $scope.toggleEditing = function(dataset) {
+      dataset.editing = !dataset.editing;
+    };
+
+    $scope.save = function(dataset) {
+      dataset.editing = false;
+    }
+
+
+}]);
+
+//Excellent Angular form tutorial at https://scotch.io/tutorials/submitting-ajax-forms-the-angularjs-way
+myApp.controller('loginController', ['$scope', '$http', function($scope, $http) {
 
 }]);
 

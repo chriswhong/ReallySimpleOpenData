@@ -21,6 +21,11 @@ Development site is live at [http://rsod.herokuapp.com](http://rsod.herokuapp.co
 - The admin can choose to upload data files to the server, or link to existing files elsewhere on the web.
 - Layout based on [CKAN](http://ckan.org/) catalog
 
+## Project Needs
+- Node developers
+- UI/UX Help
+- Design Help
+
 ## How to Deploy
 - Coming soon, this project is still in development.  Please feel free to contribute!
 

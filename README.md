@@ -4,17 +4,19 @@ Development site is live at [http://rsod.herokuapp.com](http://rsod.herokuapp.co
 
 ## Key Tenets
 - You don't need expensive or complicated software to have an Open Data Portal
-- RSOD is just a searchable metadata catalog.  That's it.  No mapping, charting, APIs, databases, user accounts, etc... 
+- "Bells and Whistles" on Open Data Portals tend to get in the way of raw data access
+- Discoverability first, download second, utility *somewhere else*
+- Link to the data "where it lies".  No need to host it all in the same place... host individual datasets where they are most useful and easiest to access
+- RSOD is just a searchable metadata catalog.  That's it.  No mapping, charting, data APIs, databases, user accounts, etc... 
 - Designed around the [data.json catalog standard](https://project-open-data.cio.gov/catalog/#machine-readable-format).  
 - Built on a modern stack - MEAN - MongoDB, Express.js, Angular.js, Node.js - Full Stack javascript FTW
-- Bootstrap 3 for a responsive-first layout
 - Developed by Civic Hackers and Open Data Enthusiasts who want to give data publishers another open source option for Open Data
 
 ## KISS
 - Catalog Data is stored in exactly the same structure as a valid data.json file in a single MongoDB collection
 - The frontend consumes a valid data.json endpoint (so it's automatically exposed for anyone who wants to consume it elsewhere)
 - Just 2 environment variables are required: a *MongoDB URI* and an *admin password*
-- RSOD is a single-page app.  
+- RSOD is a single-page app 
 - Angular loads the entire data.json file once.  All searching & filtering are done in the browser. No server side rendering.
 - The admin can choose to upload data files to the server, or link to existing files elsewhere on the web.
 - Layout based on [CKAN](http://ckan.org/) catalog

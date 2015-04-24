@@ -13,7 +13,7 @@
     "express-session": "^1.10.4",
     "jade": "~1.9.2",
     "mongoconnect": "^0.3.0",
-    "mongodb": "^1.4.34",
+    "mongodb": "^1.4.35",
     "morgan": "~1.5.1",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",

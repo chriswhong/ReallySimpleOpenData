@@ -17,8 +17,6 @@ var config = require('./config')
 
 var app = express();
 
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -37,10 +35,8 @@ app.use(session({secret: 'mysecret',
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/data.json', routes);
-//app.use('/users', users);
-
-
+//TODO: Does this actually work?
+app.use(routes);
 
 passport.serializeUser(function(user, done) {
   console.log("serialize " + user);
@@ -147,9 +143,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
-
-
 
 module.exports = app;

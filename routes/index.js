@@ -23,6 +23,6 @@ router.get('/data.json', function(req,res, next) {
 });
 
 //Link methods to router
-datasetRest(router)
+//datasetRest(router)
 
 module.exports = router;

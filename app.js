@@ -9,15 +9,15 @@ var users = require('./routes/users');
 var session = require('express-session')
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var uuid = require('uuid');
+var dataset = require('./routes/dataset')
 
 //require('./ connect');
 var config = require('./config');
 var low = require('lowdb');
 var db = low('db.json');
-db('posts').push({ id: uuid(), title: 'lowdb is awesome'});
+//db('posts').push({ id: uuid(), title: 'lowdb is awesome'});
 // 
-console.log(db('dataset').value());
+//console.log(db('dataset').value());
 
 
 var app = express();
@@ -42,6 +42,7 @@ app.use(passport.session());
 
 //TODO: Does this actually work?
 app.use(routes);
+app.use('/api/v1', dataset)
 
 passport.serializeUser(function(user, done) {
   console.log("serialize " + user);

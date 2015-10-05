@@ -9,7 +9,8 @@ var datasetRest = require('./dataset.js')
 //   res.render('index', { title: 'Express' });
 // });
 
-router.get('/', function(req,res, next) {
+//endpoint for full data catalog  
+router.get('/data.json', function(req,res, next) {
   var data = require('../mongoconnect').getData();
   data.find().toArray(function(err, results){
     res.json(results);

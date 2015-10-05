@@ -1,4 +1,4 @@
-var express = require('express');
+  var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -9,10 +9,15 @@ var users = require('./routes/users');
 var session = require('express-session')
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var uuid = require('uuid');
 
-require('./mongoconnect');
-var config = require('./config')
-
+//require('./ connect');
+var config = require('./config');
+var low = require('lowdb');
+var db = low('db.json');
+db('posts').push({ id: uuid(), title: 'lowdb is awesome'});
+// 
+console.log(db('dataset').value());
 
 
 var app = express();

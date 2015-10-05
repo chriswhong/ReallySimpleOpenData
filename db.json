@@ -1,0 +1,201 @@
+{
+  "conformsTo": "https://project-open-data.cio.gov/v1.1/schema",
+  "dataset": [
+    {
+      "accessLevel": "public",
+      "landingPage": "https://data.baltimorecity.gov/d/k78j-azhn",
+      "issued": "2015-10-04",
+      "modified": "2015-10-04",
+      "keyword": [
+        "transportation",
+        "towing",
+        "tow"
+      ],
+      "contactPoint": {
+        "fn": "<Nobody>",
+        "hasEmail": "mailto:"
+      },
+      "publisher": {
+        "name": "data.baltimorecity.gov"
+      },
+      "identifier": "1",
+      "description": "Cars that are towed within city limits are taken to either the Main Impound Storage Facility located at 6700 Pulaski Highway, or a smaller holding facility at 410 Fallsway. The majority of abandoned vehicles, scofflaw vehicles and cars that are towed as a result of an accident or police activity are taken to the Main Impound Storage Facility. Vehicles that are illegally parked along major city gateways during peak hours (rush hour) are placed at the Fallsway lot for up to 48 hours. If the vehicle is not retrieved from the facility within 48 hours, it is then moved to the Pulaski Highway lot where storage fees may be assessed. Vehicles remaining at the Fallsway facility by the close of business each Friday will also be moved to Pulaski Highway.",
+      "title": "DOT Towing",
+      "distribution": [
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.csv?accessType=DOWNLOAD",
+          "mediaType": "text/csv"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.rdf?accessType=DOWNLOAD",
+          "mediaType": "application/rdf+xml"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.json?accessType=DOWNLOAD",
+          "mediaType": "application/json"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.xml?accessType=DOWNLOAD",
+          "mediaType": "application/xml"
+        }
+      ],
+      "license": "http://creativecommons.org/licenses/by/3.0/legalcode",
+      "theme": [
+        "Transportation"
+      ]
+    },
+    {
+      "accessLevel": "public",
+      "landingPage": "https://data.baltimorecity.gov/d/bcxw-m234",
+      "issued": "2015-10-02",
+      "modified": "2015-10-02",
+      "keyword": [
+        "liquor",
+        "event",
+        "festival",
+        "license",
+        "permit"
+      ],
+      "contactPoint": {
+        "fn": "<Nobody>",
+        "hasEmail": "mailto:"
+      },
+      "publisher": {
+        "name": "data.baltimorecity.gov"
+      },
+      "identifier": "2",
+      "description": "One Day Liquor Licenses",
+      "title": "One Day Liquor Licenses",
+      "distribution": [
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/bcxw-m234/rows.csv?accessType=DOWNLOAD",
+          "mediaType": "text/csv"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/bcxw-m234/rows.rdf?accessType=DOWNLOAD",
+          "mediaType": "application/rdf+xml"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/bcxw-m234/rows.json?accessType=DOWNLOAD",
+          "mediaType": "application/json"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/bcxw-m234/rows.xml?accessType=DOWNLOAD",
+          "mediaType": "application/xml"
+        }
+      ],
+      "license": "http://creativecommons.org/licenses/by/3.0/legalcode",
+      "theme": [
+        "City Services"
+      ]
+    },
+    {
+      "accessLevel": "public",
+      "landingPage": "https://data.baltimorecity.gov/d/k78j-azhn",
+      "issued": "2015-10-04",
+      "modified": "2015-10-04",
+      "keyword": [
+        "transportation",
+        "towing",
+        "tow"
+      ],
+      "contactPoint": {
+        "fn": "<Nobody>",
+        "hasEmail": "mailto:"
+      },
+      "publisher": {
+        "name": "data.baltimorecity.gov"
+      },
+      "description": "Cars that are towed within city limits are taken to either the Main Impound Storage Facility located at 6700 Pulaski Highway, or a smaller holding facility at 410 Fallsway. The majority of abandoned vehicles, scofflaw vehicles and cars that are towed as a result of an accident or police activity are taken to the Main Impound Storage Facility. Vehicles that are illegally parked along major city gateways during peak hours (rush hour) are placed at the Fallsway lot for up to 48 hours. If the vehicle is not retrieved from the facility within 48 hours, it is then moved to the Pulaski Highway lot where storage fees may be assessed. Vehicles remaining at the Fallsway facility by the close of business each Friday will also be moved to Pulaski Highway.",
+      "title": "DOT Towing",
+      "distribution": [
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.csv?accessType=DOWNLOAD",
+          "mediaType": "text/csv"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.rdf?accessType=DOWNLOAD",
+          "mediaType": "application/rdf+xml"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.json?accessType=DOWNLOAD",
+          "mediaType": "application/json"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.xml?accessType=DOWNLOAD",
+          "mediaType": "application/xml"
+        }
+      ],
+      "license": "http://creativecommons.org/licenses/by/3.0/legalcode",
+      "theme": [
+        "Transportation"
+      ],
+      "identifier": "NJFpn651l"
+    },
+    {
+      "accessLevel": "public",
+      "landingPage": "https://data.baltimorecity.gov/d/k78j-azhn",
+      "issued": "2015-10-04",
+      "modified": "2015-10-04",
+      "keyword": [
+        "transportation",
+        "towing",
+        "tow"
+      ],
+      "contactPoint": {
+        "fn": "<Nobody>",
+        "hasEmail": "mailto:"
+      },
+      "publisher": {
+        "name": "data.baltimorecity.gov"
+      },
+      "description": "Cars that are towed within city limits are taken to either the Main Impound Storage Facility located at 6700 Pulaski Highway, or a smaller holding facility at 410 Fallsway. The majority of abandoned vehicles, scofflaw vehicles and cars that are towed as a result of an accident or police activity are taken to the Main Impound Storage Facility. Vehicles that are illegally parked along major city gateways during peak hours (rush hour) are placed at the Fallsway lot for up to 48 hours. If the vehicle is not retrieved from the facility within 48 hours, it is then moved to the Pulaski Highway lot where storage fees may be assessed. Vehicles remaining at the Fallsway facility by the close of business each Friday will also be moved to Pulaski Highway.",
+      "title": "DOT Towing",
+      "distribution": [
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.csv?accessType=DOWNLOAD",
+          "mediaType": "text/csv"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.rdf?accessType=DOWNLOAD",
+          "mediaType": "application/rdf+xml"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.json?accessType=DOWNLOAD",
+          "mediaType": "application/json"
+        },
+        {
+          "downloadURL": "https://data.baltimorecity.gov/api/views/k78j-azhn/rows.xml?accessType=DOWNLOAD",
+          "mediaType": "application/xml"
+        }
+      ],
+      "license": "http://creativecommons.org/licenses/by/3.0/legalcode",
+      "theme": [
+        "Transportation"
+      ],
+      "identifier": "4JNzRTckl"
+    }
+  ],
+  "posts": [
+    {
+      "id": "6af6c97b-b090-475a-a2b6-d85c386d3553",
+      "title": "lowdb is awesome"
+    },
+    {
+      "id": "22b08f82-5cfa-40fd-8858-0af9dcd55196",
+      "title": "lowdb is awesome"
+    },
+    {
+      "id": "26c4b94f-796b-4a82-b4d1-cf05673cc5d0",
+      "title": "lowdb is awesome"
+    },
+    {
+      "id": "b7872f3f-a37f-4df6-a88d-af34d09b101d",
+      "title": "lowdb is awesome"
+    },
+    {
+      "id": "78874244-a936-44f1-a439-c570b1f0a6a7",
+      "title": "lowdb is awesome"
+    }
+  ]
+}

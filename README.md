@@ -23,6 +23,10 @@ RSOD is a simple catalog UI and metadata store, all of the data will be hosted e
 - The admin can choose to upload data files to the server, or link to existing files elsewhere on the web.
 - Layout based on [CKAN](http://ckan.org/) catalog
 
+##Data
+- Data will be stored elsewhere.  The user can paste in a link and choose the correct resource type.
+- One idea is to eautomate the use of third party services.  (put in your Amazon S3 key and RSOD will retain it and give you a UI for uploading files when you create a dataset.  Same for CartoDB, Github, generic FTP server, etc.  RSOD can act as broker for the upload, but never hosts the data itself.)
+
 ##API
 Root URL:`http://{myorg}.reallysimpleopendata.com`
 

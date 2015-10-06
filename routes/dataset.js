@@ -1,5 +1,5 @@
-// var mongodb = require('mongodb'),
-//     url = 'mongodb://localhost:27017/myproject'
+var mongodb = require('mongodb'),
+    url = 'mongodb://localhost:27017/myproject'
 var express = require('express');
 var router = express.Router();
 var low = require('lowdb');

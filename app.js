@@ -11,6 +11,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var dataset = require('./routes/dataset')
 
+require('./mongoconnect');
+
 //require('./ connect');
 var config = require('./config');
 var low = require('lowdb');
@@ -26,8 +28,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+// var subdomainOptions = {
+//   base: 'reallysimpleopendata.com' 
+// };
+
+// app.use(require('subdomain')(subdomainOptions));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
@@ -40,9 +45,29 @@ app.use(session({secret: 'mysecret',
 app.use(passport.initialize());
 app.use(passport.session());
 
-//TODO: Does this actually work?
-app.use(routes);
-app.use('/api/v1', dataset)
+var subdomainOptions = {
+  base: 'reallysimpleopendata.com' 
+};
+
+app.use(require('subdomain')(subdomainOptions));
+
+
+
+// //TODO: Does this actually work?
+// app.get('/subdomain/:domain', function(req, res, next){
+//   console.log('matched route');
+//   next();
+// });
+
+app.use('/subdomain/:domain',function(req, res, next) {
+  console.log('mahparams!',req.params);
+  next();
+});
+
+app.use('/subdomain/:domain', routes);
+app.use('/subdomain/:domain/api/v1', dataset)
+
+
 
 passport.serializeUser(function(user, done) {
   console.log("serialize " + user);

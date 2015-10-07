@@ -1,4 +1,29 @@
-var myApp = angular.module('mainApp', ['angular.filter']);
+var myApp = angular.module('mainApp', ['angular.filter','ngRoute']);
+
+// configure our routes
+    myApp.config(function($routeProvider, $locationProvider) {
+        $routeProvider
+
+            // route for the home page
+            .when('/', {
+                templateUrl : 'pages/home.html',
+                controller  : 'mainController'
+            })
+            .when('/dataset/:id', {
+                templateUrl : 'pages/dataset.html',
+                controller  : 'datasetController'
+            })
+
+
+
+            .otherwise({redirectTo : '/'});
+        // use the HTML5 History API
+        $locationProvider.html5Mode(true);
+    });
+
+myApp.controller('datasetController', ['$scope', '$http', function($scope, $http) {
+
+}]);
 
 myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
     //set the default sort
@@ -11,6 +36,8 @@ myApp.controller('mainController', ['$scope', '$http', function($scope, $http) {
       success(function(data, status, headers, config) {
         $scope.datasets = data;
         $scope.categories = $scope.getCategories(data);
+        var parts = location.hostname.split('.');
+        $scope.domain = parts[0];
       });
 
     //check if logged in on page load

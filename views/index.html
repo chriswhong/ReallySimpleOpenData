@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="/">
   <meta charset="UTF-8">
   <title>WHONG - example-example6-production</title>
   
@@ -19,7 +20,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Really Simple Open Data</a>
+          <a class="navbar-brand" href="#">Really Simple Open Data - <span ng-model="domain">{{domain}}</span></a> 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -79,97 +80,15 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div class = "container">
-      <div class="row">
-        <div class="col-md-3 sidebar">
-          
-          <h4>Categories</h4>
-          
-          <div class="category" ng-repeat="category in categories" ng-click="setCategory(category.name)">
-            {{category.name}} <span class="badge">{{category.count}}</span>
-          </div>
-
-          <!-- <div ng-repeat="dataset in datasets | unique: 'theme'" ng-click="setCategory(dataset.theme[0])">
-            {{dataset.theme[0]}}
-          </div> -->
-
-          <h4>Tags</h4>
-          <div ng-repeat="tag in datasets | uniqueTags">
-            {{tag}}
-          </div>
-
-         
-        </div>
-        <div class="col-md-9">
-          
-          <div class="input-group">
-            <input type="text" id="query" class="form-control" placeholder="Search Datasets" ng-model="searchString" ng-enter="updateQuery()">
-              <div class="input-group-btn">
-            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-            </div>
-          </div>
-          <div class = "col-md-12">
-            <div class="col-md-6 found">
-              <h3>{{filtered.length}} datasets found</h3> 
-            </div>
-            <div class="col-md-6 sort">
-              <h5>Sort By: </h5><select class="form-control" ng-model="sortBy">
-              <option selected="selected" value="+title" selected="selected">Title Ascending</option>
-              <option value="-title">Title Descending</option>
-            </select>
-            </div>
-
-            
-          </div>
-          <div ng-repeat="dataset in filtered = (datasets | filter:mainFilter | orderBy:sortBy)">
-            <div class = "col-md-12 catalogItem" ng-hide = "dataset.editing">
-              <div class="col-md-9">
-                <h4>{{dataset.title}}</h4>
-                <p>{{dataset.description}}</p>
-                <p><strong>Created:</strong> {{dataset.issued}} <strong>Updated:</strong> {{dataset.modified}}</p>
-                <ul class="tags">
-                  <li ng-repeat="tag in dataset.keyword"> 
-                    <a href="#">{{tag}}</a>
-                  </li>
-                <ul>
-              </div>
-              <div class="col-md-3 getData">
-                <h5>Downloads</h5>
-                <div ng-repeat="obj in dataset.distribution">
-                  <a href = "{{obj.downloadURL}}"><button type="button" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> {{obj.mediaType}}</button></a>
-                </div>
-                
-              </div>
-              <div class="col-md-12" ng-show="loggedIn" ng-click="toggleEditing(dataset)">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true" ></span> Edit dataset
-              </div>
-            </div>
-            <div class = "col-md-12 catalogItem" ng-show = "dataset.editing">
-              <div class="col-md-9">
-                Edit Mode Left
-              </div>
-              <div class="col-md-3 getData">
-                Edit Mode Right
-                
-              </div>
-              <div class="col-md-12" >
-                <a href="#" class="btn btn-sm btn-primary" ng-click="save(dataset)">Save</a>
-              </div>
-            </div>
-            <div class = "row" ng-show="loggedIn">
-              
-            </div>
-          </div>
-          
-          
-        </div>
-      </div>
+    <div class = "container" ng-view>
+      
     </div>
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.6/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-route.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.4/angular-filter.js"></script>
   <script src="js/app.js"></script>
 </body>

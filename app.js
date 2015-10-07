@@ -1,4 +1,4 @@
-  var express = require('express');
+var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -9,30 +9,17 @@ var users = require('./routes/users');
 var session = require('express-session')
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var dataset = require('./routes/dataset')
-
+var dataset = require('./routes/dataset');
 require('./mongoconnect');
-
-//require('./ connect');
 var config = require('./config');
 var low = require('lowdb');
 var db = low('db.json');
-//db('posts').push({ id: uuid(), title: 'lowdb is awesome'});
-// 
-//console.log(db('dataset').value());
-
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
-// var subdomainOptions = {
-//   base: 'reallysimpleopendata.com' 
-// };
-
-// app.use(require('subdomain')(subdomainOptions));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
@@ -46,28 +33,28 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var subdomainOptions = {
-  base: 'reallysimpleopendata.com' 
+  base: 'reallysimpleopendata.com' ,
+  removeWWW: true
 };
 
 app.use(require('subdomain')(subdomainOptions));
 
-
-
-// //TODO: Does this actually work?
-// app.get('/subdomain/:domain', function(req, res, next){
-//   console.log('matched route');
-//   next();
-// });
-
-app.use('/subdomain/:domain',function(req, res, next) {
-  console.log('mahparams!',req.params);
-  next();
-});
-
+//catalog view and data.json
 app.use('/subdomain/:domain', routes);
+
+//dataset REST api
 app.use('/subdomain/:domain/api/v1', dataset)
 
+//homepage (after the subdomain routers)
+app.get('/', function(req, res, next){
+  res.sendFile('/views/home.html', {'root': './'});
+});
 
+ // This route deals enables HTML5Mode by forwarding missing files to the index.html
+app.get('/*', function(req, res) {
+  console.log('catchall')
+  res.sendFile('/views/index.html', {'root': './'});
+});
 
 passport.serializeUser(function(user, done) {
   console.log("serialize " + user);
@@ -98,9 +85,9 @@ passport.use(new LocalStrategy(function(username, password, done) {
 }));
 
 
-app.get('/login', function(req, res) {
-  res.sendfile('views/login.html');
-});
+// app.get('/login', function(req, res) {
+//   res.sendfile('views/login.html');
+// });
 
 // app.post('/login',
 //   passport.authenticate('local'),
@@ -112,36 +99,12 @@ app.get('/login', function(req, res) {
 //   });
 
 
-//from http://stackoverflow.com/questions/15711127/express-passport-node-js-error-handling
-app.post('/login',
-  passport.authenticate('local'), 
-  function(req, res) {
-
-    // Generate a JSON response reflecting authentication status
-    if (!req.user) {
-      return res.send({ success : false, message : 'authentication failed' });
-    }
-    return res.send({ success : true, message : 'authentication succeeded' });
-  });
 
 
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.send({ success : true, message : 'user logged out' });
-});
 
 
-/* GET Home Page */
-app.get('/loggedin', function(req, res){
-  if (!req.user) {
-      return res.send({ success : false, message : 'user not logged in' });
-    }
-    return res.send({ success : true, message : 'user logged in' });
-});
+
  
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

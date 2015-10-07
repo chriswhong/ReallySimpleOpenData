@@ -1,6 +1,5 @@
 # ReallySimpleOpenData (RSOD)
 A no-frills open data portal built with node, express, mongodb and angular.  
-Development site is live at [http://rsod.herokuapp.com](http://rsod.herokuapp.com)
 
 ## Key Tenets
 - You don't need expensive or complicated software to have an Open Data Portal
@@ -12,14 +11,36 @@ Development site is live at [http://rsod.herokuapp.com](http://rsod.herokuapp.co
 - Built on a modern stack - MEAN - MongoDB, Express.js, Angular.js, Node.js - Full Stack javascript FTW
 - Developed by Civic Hackers and Open Data Enthusiasts who want to give data publishers another open source option for Open Data
 
-## KISS
-- Catalog Data is stored in exactly the same structure as a valid data.json file in a single MongoDB collection
-- The frontend consumes a valid data.json endpoint (so it's automatically exposed for anyone who wants to consume it elsewhere)
-- Just 2 environment variables are required: a *MongoDB URI* and an *admin password*
-- RSOD is a single-page app 
-- Angular loads the entire data.json file once.  All searching & filtering are done in the browser. No server side rendering.
+## Vision
+People who want to create a searchable, standards-compliant open data catalog should be able to do so in just a few minutes.  RSOD is a multi-tenant web app that will have a custom subdomain for each open data portal. ({myorg}.reallysimpleopendata.com)
+RSOD is a simple catalog UI and metadata store, all of the data will be hosted externally.
+
+
+## Architecture
+- Each portal's catalog data is stored in MongoDB in the same structure as data.json. [Here's some info on data.json ](https://project-open-data.cio.gov/v1.1/api/)  
+- The frontend consumes a valid data.json endpoint.
+- Angular loads the entire data.json file once.  All searching & filtering are done in the browser. No server side rendering, no pagination.  This may be more difficult as a catalog grows.
 - The admin can choose to upload data files to the server, or link to existing files elsewhere on the web.
 - Layout based on [CKAN](http://ckan.org/) catalog
+
+##Data
+- Data will be stored elsewhere.  The user can paste in a link and choose the correct resource type.
+- One idea is to eautomate the use of third party services.  (put in your Amazon S3 key and RSOD will retain it and give you a UI for uploading files when you create a dataset.  Same for CartoDB, Github, generic FTP server, etc.  RSOD can act as broker for the upload, but never hosts the data itself.)
+
+##API
+Root URL:`http://{myorg}.reallysimpleopendata.com`
+
+`/data.json OR /datasets`
+Gets the dataset as an array of objects for the current subdomain
+
+#CRUD 
+ `POST /dataset` Create new dataset 
+ `GET /dataset/:id` Get one dataset
+ `PUT /dataset/:id` Update dataset
+ `DELETE /dataset/:id` Delete dataset
+
+##Login
+There is one login and password for each domain, this user will have the ability to create, update, and delete datasets.
 
 ## Project Needs
 - Node developers

@@ -1,0 +1,42 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h2>{{ dataset.title }}</h2>
+  <p>{{ dataset.description }}</p>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      {% for resource in dataset.distribution %}
+        {{resource.downloadURL }}
+        {{ resource.mediaType }}
+      {% endfor %}
+      <div class="meta">
+        
+ 
+      </div>
+    </div>
+    <div class="col-md-4">
+ 
+    </div>
+  </div>
+
+  <form action="{{ '/datasets/' + dataset.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+    <br>
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+    <a href="{{ '/datasets/' + dataset._id + '/edit' }}" title="edit" class="btn btn-default">
+      Edit
+    </a>
+    &nbsp;
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-danger" type="submit">Delete</button>
+  </form>
+
+  <br>
+  <h3>Comments</h3>
+  {% for comment in dataset.comments %}
+    {% include '../comments/comment.html' %}
+  {% endfor %}
+  {% include '../comments/form.html' %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  {% if (datasets.length) %}
+    {% for dataset in datasets %}
+      {% include 'dataset.html' %}
+    {% endfor %}
+
+    {% if (pages > 1) %}
+      <ul class="pagination">
+        {% autoescape false %}
+          {{ createPagination(pages, page) }}
+        {% endautoescape %}
+      </ul>
+    {% endif %}
+  {% else %}
+    <h4 class="muted">
+      No datasets.&nbsp;
+      <a href="/datasets/new">create one</a>
+    </h4>
+  {% endif %}
+{% endblock %}

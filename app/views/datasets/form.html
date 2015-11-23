@@ -1,0 +1,158 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+  <hr>
+{% endblock %}
+
+{% block content %}
+  {% if dataset.isNew %}
+    {% set action = '/datasets' %}
+  {% else %}
+    {% set action = '/datasets/' + dataset._id %}
+  {% endif %}
+
+  <div class="row">
+    <div class="col-md-8">
+      <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal" id="myform">
+
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+
+        {% if not dataset.isNew %}
+          <input type="hidden" name="_method" value="PUT">
+        {% endif %}
+
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3 class="panel-title">Metadata</h3></div>
+          <div class="panel-body">
+
+            <div class="form-group">
+              <label for="title" class="col-sm-2 control-label">Title</label>
+              <div class="col-sm-10">
+                <input type="text" name="title" value="{{ dataset.title }}" placeholder="Enter the title" class="form-control" id="title">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="description" class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-10">
+                <textarea rows="5" name="description" placeholder="Enter the dataset description" id="description" cols="30" rows="10" class="form-control">{{ dataset.description }}</textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="tags" class="col-sm-2 control-label">Tags</label>
+              <div class="col-sm-10">
+                <input type="text" name="keyword" value="{{ dataset.keyword }}" placeholder="Enter the tags" class="form-control" id="tags">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="publisher" class="col-sm-2 control-label">Publisher</label>
+              <div class="col-sm-10">
+                <input type="text" name="publisher" value="{{ dataset.publusher }}" placeholder="Data Publisher" class="form-control" id="publisher">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="theme" class="col-sm-2 control-label">Category</label>
+              <div class="col-sm-10">
+                <input type="text" name="theme" value="{{ dataset.theme }}" placeholder="Category" class="form-control" id="theme">
+              </div>
+            </div>
+          </div>
+        </div>
+     
+        <div class="panel panel-default resource-panel">
+          <div class="panel-heading"><h3 class="panel-title">Resources</h3></div>
+          <div class="panel-body">
+            {% for resource in dataset.distribution %}
+            <div class="resource-group">
+              <div class="form-group">
+                <label for="theme" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" name="distribution[{{ loop.index0 }}][title]" value="{{ resource.title }}" placeholder="Title" class="form-control">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="theme" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                  <input type="text" name="distribution[{{ loop.index0 }}][description]" value="{{ resource.description }}" placeholder="Description" class="form-control">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="theme" class="col-sm-2 control-label">URL</label>
+                <div class="col-sm-9">
+                  <input type="text" name="distribution[{{ loop.index0 }}][downloadURL]" value="{{ resource.downloadURL }}" placeholder="URL" class="form-control" id="theme">
+                </div>
+                <div class="col-sm-1">
+                  <button type="button" class="btn btn-danger remove-resource">-</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="distributionType" class="col-sm-2 control-label">Type:</label>
+                <div class="col-sm-2">
+                  <select class="form-control" id="distributionType" name="distribution[{{ loop.index0 }}][mediaType]" value="{{ resource.mediaType }}">
+                    <option value="CSV" {% if resource.mediaType  == "CSV" %}selected="selected"{% endif %}>CSV</option>
+                    <option value="SHP" {% if resource.mediaType  == "SHP" %}selected="selected"{% endif %}>SHP</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            <div class="form-group">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-1">
+                <button type="button" class="btn btn-success add-resource">New Resource</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-primary" type="submit">Save</button>
+            &nbsp;
+            <a href="/datasets" class="btn btn-link">Cancel</a>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+<!--     <div class="col-md-4">
+      {% if (!article.isNew && article.image && article.image.files && article.image.files.length) %}
+        <img src="{{ article.image.cdnUri + '/mini_' + article.image.files[0] }}" alt="">
+      {% endif %}
+    </div> -->
+  </div>
+  
+  <script type='text/template' id='resource-template'>
+    <div class="resource-group">
+    <div class="form-group">
+      <label for="theme" class="col-sm-2 control-label">URL</label>
+      <div class="col-sm-9">
+        <input type="text" placeholder="URL" class="form-control input-downloadURL" name="distribution[{% raw %}{{i}}{% endraw %}][downloadURL]">
+      </div>
+      <div class="col-sm-1">
+        <button type="button" class="btn btn-danger remove-resource">-</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="distributionType" class="col-sm-2 control-label">Type:</label>
+      <div class="col-sm-2">
+        <select class="form-control input-mediaType" name="distribution[{% raw %}{{i}}{% endraw %}][mediaType]" >
+          <option>Type</option>
+          <option value="CSV">CSV</option>
+          <option value="SHP">SHP</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  </script>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+<div class="dataset">
+  <h4>
+    <a href="{{ '/datasets/' + dataset._id }}" title="{{ dataset.title }}">
+      {{ dataset.title }}
+    </a>
+  </h4>
+  <p>{{ dataset.description }}</p>
+
+<!-- show date -->
+ <!--  <span class="muted">{{ dataset.issued.toISOString()|date('M d, Y  h:i a') }}</span> -->
+
+
+<!-- show user -->
+<!--   {% if (dataset.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + dataset.user._id }}">
+      {{ dataset.user.name || dataset.user.username }}
+    </a>
+  {% endif %} -->
+
+  {% if (dataset.keyword) %}
+    {% for tag in dataset.keyword.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>

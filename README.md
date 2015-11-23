@@ -1,56 +1,64 @@
-# ReallySimpleOpenData (RSOD)
-A no-frills open data portal built with node, express, mongodb and angular.  
+[![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose-demo.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose-demo)
+[![Gittip](https://img.shields.io/gratipay/madhums.svg?style=flat)](https://www.gratipay.com/madhums/)
+[![Dependencies](https://img.shields.io/david/madhums/node-express-mongoose-demo.svg?style=flat)](https://david-dm.org/madhums/node-express-mongoose-demo)
+[![Code climate](http://img.shields.io/codeclimate/github/madhums/node-express-mongoose-demo.svg?style=flat)](https://codeclimate.com/github/madhums/node-express-mongoose-demo)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/madhums/node-express-mongoose-demo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-## Key Tenets
-- You don't need expensive or complicated software to have an Open Data Portal
-- "Bells and Whistles" on Open Data Portals tend to get in the way of raw data access
-- Discoverability first, download second, utility *somewhere else*
-- Link to the data "where it lies".  No need to host it all in the same place... host individual datasets where they are most useful and easiest to access
-- RSOD is just a searchable metadata catalog.  That's it.  No mapping, charting, data APIs, databases, user accounts, etc... 
-- Designed around the [data.json catalog standard](https://project-open-data.cio.gov/catalog/#machine-readable-format).  
-- Built on a modern stack - MEAN - MongoDB, Express.js, Angular.js, Node.js - Full Stack javascript FTW
-- Developed by Civic Hackers and Open Data Enthusiasts who want to give data publishers another open source option for Open Data
+# Nodejs Express Mongoose Demo
 
-## Vision
-People who want to create a searchable, standards-compliant open data catalog should be able to do so in just a few minutes.  RSOD is a multi-tenant web app that will have a custom subdomain for each open data portal. ({myorg}.reallysimpleopendata.com)
-RSOD is a simple catalog UI and metadata store, all of the data will be hosted externally.
+This is a demo node.js application illustrating various features used in everyday web development, with a fine touch of best practices. The demo app is a blog application where users (signing up using facebook, twitter, github and simple registrations) can create an article, delete an article and add comments on the article.
 
+## Boilerplate
 
-## Architecture
-- Each portal's catalog data is stored in MongoDB in the same structure as data.json. [Here's some info on data.json ](https://project-open-data.cio.gov/v1.1/api/)  
-- The frontend consumes a valid data.json endpoint.
-- Angular loads the entire data.json file once.  All searching & filtering are done in the browser. No server side rendering, no pagination.  This may be more difficult as a catalog grows.
-- The admin can choose to upload data files to the server, or link to existing files elsewhere on the web.
-- Layout based on [CKAN](http://ckan.org/) catalog
+Want to build something from scratch? use the [boilerplate app](https://github.com/madhums/node-express-mongoose)
 
-##Data
-- Data will be stored elsewhere.  The user can paste in a link and choose the correct resource type.
-- One idea is to eautomate the use of third party services.  (put in your Amazon S3 key and RSOD will retain it and give you a UI for uploading files when you create a dataset.  Same for CartoDB, Github, generic FTP server, etc.  RSOD can act as broker for the upload, but never hosts the data itself.)
+* Checkout the [apps that are built using this approach](https://github.com/madhums/node-express-mongoose/wiki/Apps-built-using-this-approach)
+* The [wiki](https://github.com/madhums/node-express-mongoose/wiki) is wip, it has some information about the way application is setup.
 
-##API
-Root URL:`http://{myorg}.reallysimpleopendata.com`
+## Requirements
 
-`/data.json OR /datasets`
-Gets the dataset as an array of objects for the current subdomain
+* [NodeJs](http://nodejs.org)
+* [mongodb](http://mongodb.org)
+* [imagemagick](http://www.imagemagick.org/script/index.php)
 
-#CRUD 
- `POST /dataset` Create new dataset 
- `GET /dataset/:id` Get one dataset
- `PUT /dataset/:id` Update dataset
- `DELETE /dataset/:id` Delete dataset
+## Install
 
-##Login
-There is one login and password for each domain, this user will have the ability to create, update, and delete datasets.
+```sh
+$ git clone git://github.com/madhums/node-express-mongoose-demo.git
+$ npm install
+```
 
-## Project Needs
-- Node developers
-- UI/UX Help
-- Design Help
+**NOTE:** Do not forget to set the facebook, twitter, google, linkedin and github `CLIENT_ID`s and `SECRET`s. In `development` env, you can simply copy
+`config/env/env.example.json` to `config/env/env.json` and just replace the
+values there. In production, it is not safe to keep the ids and secrets in
+a file, so you need to set it up via commandline. If you are using heroku
+checkout how environment variables are set [here](https://devcenter.heroku.com/articles/config-vars).
 
-## How to Deploy
-- Coming soon, this project is still in development.  Please feel free to contribute!
+If you want to use image uploads, don't forget to set env variables for the
+imager config.
 
-## License 
-- This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+```sh
+$ export IMAGER_S3_KEY=AWS_S3_KEY
+$ export IMAGER_S3_SECRET=AWS_S3_SECRET
+$ export IMAGER_S3_BUCKET=AWS_S3_BUCKET
+```
 
-![Screengrab from 3/22/2015](https://www.evernote.com/shard/s288/sh/20e054d9-7be1-45d4-ba91-1f4ef8ff9c99/0e7c0b2642bb84c54120d71d6bd03abf/res/361e3f67-8776-4af1-beac-323fad687799/skitch.png?resizeSmall&width=832)
+then
+
+```sh
+$ npm start
+```
+
+(Note: When you do npm start, `NODE_PATH` variable is set from package.json start script. If you are doing `node server.js`, you need to make sure to set this)
+
+Then visit [http://localhost:3000/](http://localhost:3000/)
+
+## Tests
+
+```sh
+$ npm test
+```
+
+## License
+
+MIT

@@ -1,0 +1,28 @@
+<div class="article">
+  <h3>
+    <a href="{{ '/articles/' + article._id }}" title="{{ article.title }}">
+      {{ article.title }}
+    </a>
+  </h3>
+  <p>{{ article.body }}</p>
+
+  <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (article.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + article.user._id }}">
+      {{ article.user.name || article.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (article.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in article.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>

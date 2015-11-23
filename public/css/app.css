@@ -1,0 +1,106 @@
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* -----------------------------------------------
+  App styles
+  ------------------------------------------------ */
+
+body {
+  padding-top: 60px;
+}
+
+.article, .comment {
+  padding: 15px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.error,
+a.error,
+a.error:hover,
+a.error:focus,
+button.error,
+button.error:hover,
+button.error:focus {
+  color: #D9534F;
+}
+
+.form-actions {
+  background: #fff;
+  border: 0;
+}
+
+#spacer {
+  display: inline-block;
+}
+
+.muted {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.alert {
+  margin-top: 10px;
+}
+
+.navbar-brand {
+  font-size: 14px;
+  color: #000 !important;
+}
+
+.navbar-nav > li > a.travis{
+  padding-top: 13px;
+}
+
+.navbar-right > li > a {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/*Dataset List View
+*/
+.dataset {
+    border-bottom: 1px dotted #dddddd;
+    padding: 8px 0 18px 0;
+}
+
+.dataset a {
+  color: #000;
+}

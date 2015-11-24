@@ -36,9 +36,12 @@ var DatasetSchema = new Schema({
   user: {type : Schema.ObjectId, ref : 'User'},
   title: {type: String, default : '', trim : true},
   description: {type: String, default : '', trim : true},
-  keyword: {type: [], get: getTags, set: setTags},
+  // keyword: {type: [], get: getTags, set: setTags},
+  keyword: [{type: String, default : '', trim : true}],
   modified: {type : Date, default : Date.now},
-  publisher: {type: String, default : '', trim : true},
+  publisher: {
+    name: {type: String, default : '', trim : true}
+  },
   contactPoint: {
     fn: {type: String, default : '', trim : true},
     hasEmail: {type: String, default : '', trim : true}

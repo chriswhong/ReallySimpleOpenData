@@ -34,8 +34,8 @@ var setTags = function (tags) {
 
 var DatasetSchema = new Schema({
   user: {type : Schema.ObjectId, ref : 'User'},
-  title: {type: String, default : '', trim : true},
-  description: {type: String, default : '', trim : true},
+  title: {type: String, default : '', trim : true, index: true},
+  description: {type: String, default : '', trim : true, index: true},
   // keyword: {type: [], get: getTags, set: setTags},
   keyword: [{type: String, default : '', trim : true}],
   modified: {type : Date, default : Date.now},
@@ -120,11 +120,26 @@ DatasetSchema.statics = {
   list: function (options, cb) {
     var criteria = options.criteria || {}
 
-    this.find(criteria)
+    console.log(criteria);
+    var regex = new RegExp(criteria, 'i');
+    console.log(regex);
+    this.find()
+      .or([{ 'title': { $regex: regex }}, { 'description': { $regex: regex }}])
       .populate('user', 'name username')
       .sort({'createdAt': -1}) // sort by date
       .limit(options.perPage)
       .skip(options.perPage * options.page)
+      .exec(cb);
+  },
+
+  count1: function (options, cb) {
+    var criteria = options.criteria || {}
+
+    console.log(criteria);
+    var regex = new RegExp(criteria, 'i');
+    console.log(regex);
+    this.count()
+      .or([{ 'title': { $regex: regex }}, { 'description': { $regex: regex }}])
       .exec(cb);
   }
 }

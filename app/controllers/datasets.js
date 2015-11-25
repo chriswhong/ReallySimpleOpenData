@@ -28,21 +28,28 @@ exports.load = function (req, res, next, id){
  */
 
 exports.index = function (req, res){
-  var page = (req.params.page > 0 ? req.params.page : 1) - 1;
+  var page = (req.query.page > 0 ? req.query.page : 1) - 1;
   var perPage = 30;
+  var q = req.query.q;
   var options = {
     perPage: perPage,
-    page: page
+    page: page,
+    criteria: q
   };
+  console.log(options);
+
 
   Dataset.list(options, function (err, datasets) {
     if (err) return res.render('500');
-    Dataset.count().exec(function (err, count) {
+    Dataset.count1(options, function (err, count) {
+      console.log(count);
       res.render('datasets/index', {
         title: 'datasets',
         datasets: datasets,
         page: page + 1,
-        pages: Math.ceil(count / perPage)
+        pages: Math.ceil(count / perPage),
+        count: count,
+        q: q
       });
     });
   });

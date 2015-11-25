@@ -11,6 +11,15 @@
   //   console.log(fields);
   // })
 
+  $("#mainSearch").on( "keydown", function(event) {
+      if(event.which == 13) {
+        var newURL = window.location.href.split(/[?#]/)[0] + 
+            "?q=" + $(this).val();
+
+        window.location = newURL ; 
+      }
+    });
+
   $(".remove-resource").on('click', function(e) {
     $(this).closest('.resource-group').slideUp('fast',function() {
       $(this).remove();

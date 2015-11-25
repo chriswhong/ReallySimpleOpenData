@@ -104,3 +104,7 @@ button.error:focus {
 .dataset a {
   color: #000;
 }
+
+.dataset-count {
+  margin-top: 0;
+}

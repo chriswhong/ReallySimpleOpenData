@@ -37,20 +37,37 @@ exports.index = function (req, res){
     criteria: q
   };
   console.log(options);
+  
+  //set up group by
+  var agg = [
+    {$unwind: "$theme" },
+    {$group: {
+      _id: "$theme",
+      count: {$sum: 1}
+    }},
+    {$sort: { count: -1 } }
+  ];
 
+  
 
   Dataset.list(options, function (err, datasets) {
     if (err) return res.render('500');
     Dataset.count1(options, function (err, count) {
-      console.log(count);
-      res.render('datasets/index', {
-        title: 'datasets',
-        datasets: datasets,
-        page: page + 1,
-        pages: Math.ceil(count / perPage),
-        count: count,
-        q: q
+  
+
+      Dataset.aggregate(agg, function(err, categories){
+        console.log(categories);
+        res.render('datasets/index', {
+          // categories: categories
+          datasets: datasets,
+          page: page + 1,
+          pages: Math.ceil(count / perPage),
+          count: count,
+          q: q,
+          categories: categories
+        });
       });
+      
     });
   });
 };

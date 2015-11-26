@@ -1,16 +1,28 @@
 {% extends '../layouts/default.html' %}
 
 {% block main %}
+  {% if (req.isAuthenticated()) %}
+    <a href="{{ '/datasets/' + dataset._id + '/edit' }}" title="edit" class="btn btn-success">
+        Manage
+    </a>
+  {% endif %}
   <h2>{{ dataset.title }}</h2>
   <p>{{ dataset.description }}</p>
 {% endblock %}
 
 {% block content %}
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
+    <h3>Data and Resources</h3>
       {% for resource in dataset.distribution %}
-        {{resource.downloadURL }}
-        {{ resource.mediaType }}
+        <div class="row">
+          <div class="col-md-10">
+          File ({{ resource.mediaType }})
+          </div>
+          <div class="col-md-2">
+            <a href="{{resource.downloadURL }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Download</button></a>
+          </div>
+        </div>
       {% endfor %}
       <div class="meta">
         
@@ -22,7 +34,7 @@
     </div>
   </div>
 
-  <form action="{{ '/datasets/' + dataset.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+ <!--  <form action="{{ '/datasets/' + dataset.id }}" method="post" onsubmit="return confirm('Are you sure?')">
     <br>
     <input type="hidden" name="_csrf" value="{{ csrf_token }}">
     <a href="{{ '/datasets/' + dataset._id + '/edit' }}" title="edit" class="btn btn-default">
@@ -31,7 +43,7 @@
     &nbsp;
     <input type="hidden" name="_method" value="DELETE">
     <button class="btn btn-danger" type="submit">Delete</button>
-  </form>
+  </form> -->
 
   <br>
   <h3>Comments</h3>

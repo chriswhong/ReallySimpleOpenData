@@ -1,15 +1,32 @@
 {% extends '../layouts/default.html' %}
 
-{% block main %}
-  <h1>{{ title }}</h1>
-{% endblock %}
+<!-- {% block main %}
+  <h3>Datasets</h3>
+{% endblock %} -->
 
 {% block content %}
+<ol class="breadcrumb">
+  Datasets
+</ol>
 <div class="container-fluid">
 
   <div class="row">
-    <div class="col-sm-3 col-md-2"></div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="col-md-3">
+
+      <ul class="list-group">
+        <li class="list-group-item active"> 
+          <strong>Categories</strong>
+        </li>
+        {% for category in categories %}
+        <li class="list-group-item">
+          <span class="badge">{{category.count}}</span>
+          {{category._id}}
+        </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+    <div class="col-md-9">
         
         {% if (req.isAuthenticated()) %}
         <div class="row">
@@ -22,7 +39,7 @@
           <div class="col-md-12">
             <div class="form-group" style="display:inline;">
               <div class="input-group">
-                <input id="mainSearch" type="text" class="form-control" style="height: 50px;font-size: 30px;">
+                <input id="mainSearch" type="text" class="form-control" style="height: 50px;font-size: 16px;" placeholder="Search Datasets">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
               </div>
             </div>
@@ -32,25 +49,24 @@
 
         <div class="row"><div class="col-md-6"><h3 class="dataset-count">{{count}} datasets found {% if (q.length) %}for "{{q}}"{% endif %}</h3></div>
           <div class="col-md-6">
-            <form class="form-horizontal">
-            <fieldset>
+            <form class="form-inline pull-right">
+ 
             <div class="form-group text-right">
              
-              <div class="col-md-4 pull-right">
+                <label for="selectbasic">Order By</label>
                 <select id="selectbasic" name="selectbasic" class="form-control">
                   <option value="relevance">Relevance</option>
                   <option value="nameAsc">Name Ascending</option>
                   <option value="nameDesc">Name Descending</option>
                   <option value="lastModified">Last Modified</option>
                 </select>
-              </div>
-               <label class="col-md-4 control-label pull-right" for="selectbasic">Order By</label>
+         
+               
             </div>
-            </fieldset>
+         
             </form>
           </div>
         </div>
-        <div class="row">&nbsp;</div>
         <div class="row" style="border-bottom: 1px dotted rgba(73, 74, 75, 0.23);">&nbsp;</div>
         {% if (datasets.length) %}
           {% for dataset in datasets %}

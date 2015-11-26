@@ -16,9 +16,6 @@
         </li> -->
 
         {% if (req.isAuthenticated()) %}
-          <li class="{% if (isActive('/users/' + req.user.id )) %}active{% endif %}">
-            <a href="{{ '/users/' + req.user.id }}" title="Profile">Profile</a>
-          </li>
           <li>
             <a href="/logout" title="logout">Log out</a>
           </li>

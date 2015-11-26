@@ -31,6 +31,7 @@ exports.index = function (req, res){
   var page = (req.query.page > 0 ? req.query.page : 1) - 1;
   var perPage = 30;
   var q = req.query.q;
+  var order = req.query.order;
   var options = {
     perPage: perPage,
     page: page,
@@ -64,7 +65,8 @@ exports.index = function (req, res){
           pages: Math.ceil(count / perPage),
           count: count,
           q: q,
-          categories: categories
+          categories: categories,
+          order: order
         });
       });
       

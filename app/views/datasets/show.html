@@ -1,6 +1,10 @@
 {% extends '../layouts/default.html' %}
 
 {% block main %}
+
+{% endblock %}
+
+{% block content %}
   {% if (req.isAuthenticated()) %}
     <a href="{{ '/datasets/' + dataset._id + '/edit' }}" title="edit" class="btn btn-success">
         Manage
@@ -8,9 +12,6 @@
   {% endif %}
   <h2>{{ dataset.title }}</h2>
   <p>{{ dataset.description }}</p>
-{% endblock %}
-
-{% block content %}
   <div class="row">
     <div class="col-md-12">
     <h3>Data and Resources</h3>

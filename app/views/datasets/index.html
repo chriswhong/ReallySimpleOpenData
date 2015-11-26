@@ -30,7 +30,7 @@
         
         {% if (req.isAuthenticated()) %}
         <div class="row">
-          <div class="col-md-12"><button class="btn btn-primary"><span class="glyphicon-class glyphicon glyphicon-plus-sign"></span> Add Dataset</button></div>
+          <div class="col-md-12"><a href="/datasets/new" class="btn btn-primary"><span class="glyphicon-class glyphicon glyphicon-plus-sign"></span> Add Dataset</a></div>
         </div>
         <div class="row">&nbsp;</div>
         {% endif %}
@@ -39,7 +39,7 @@
           <div class="col-md-12">
             <div class="form-group" style="display:inline;">
               <div class="input-group">
-                <input id="mainSearch" type="text" class="form-control" style="height: 50px;font-size: 16px;" placeholder="Search Datasets">
+                <input id="mainSearch" type="text" class="form-control" style="height: 50px;font-size: 16px;" value="{% if (q) %}{{q}}{% endif %}" placeholder="Search Datasets">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
               </div>
             </div>
@@ -51,18 +51,18 @@
           <div class="col-md-6">
             <form class="form-inline pull-right">
  
-            <div class="form-group text-right">
-             
-                <label for="selectbasic">Order By</label>
-                <select id="selectbasic" name="selectbasic" class="form-control">
-                  <option value="relevance">Relevance</option>
-                  <option value="nameAsc">Name Ascending</option>
-                  <option value="nameDesc">Name Descending</option>
-                  <option value="lastModified">Last Modified</option>
-                </select>
-         
+              <div class="form-group text-right">
                
-            </div>
+                  <label for="selectOrder">Order By</label>
+                  <select id="selectOrder" name="selectbasic" class="form-control" onchange="buildParams()">
+                    <option value="relevance" {% if (order=='relevance') %} selected {% endif %}>Relevance</option>
+                    <option value="nameAsc" {% if (order=='nameAsc') %} selected {% endif %}>Name Ascending</option>
+                    <option value="nameDesc" {% if (order=='nameDesc') %} selected {% endif %}>Name Descending</option>
+                    <option value="lastModified" {% if (order=='lastModified') %} selected {% endif %}>Last Modified</option>
+                  </select>
+           
+                 
+              </div>
          
             </form>
           </div>

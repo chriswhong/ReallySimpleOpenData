@@ -12,6 +12,9 @@
     {% set action = '/datasets/' + dataset._id %}
   {% endif %}
 
+  <div class="page-header">
+    <h1>{{title}}</h1>
+  </div>
   <div class="row">
     <div class="col-md-8">
       <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal" id="myform">
@@ -144,11 +147,19 @@
           <div class="col-sm-offset-2 col-sm-10">
             <button class="btn btn-primary" type="submit">Save</button>
             &nbsp;
-            <a href="/datasets" class="btn btn-link">Cancel</a>
+            
           </div>
         </div>
 
       </form>
+      {% if !dataset.isNew %}
+      <form action="{{ '/datasets/' + dataset.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        &nbsp;
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </form> 
+      {% endif %}
     </div>
 
 <!--     <div class="col-md-4">

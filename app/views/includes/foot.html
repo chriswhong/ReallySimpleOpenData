@@ -13,12 +13,28 @@
 
   $("#mainSearch").on( "keydown", function(event) {
       if(event.which == 13) {
-        var newURL = window.location.href.split(/[?#]/)[0] + 
-            "?q=" + $(this).val();
-
-        window.location = newURL ; 
+        buildParams();
       }
     });
+
+  function buildParams() {
+      console.log('buildParams');
+        var newURL = window.location.href.split(/[?#]/)[0] + '?';
+
+        var params = []
+        //add search
+        if($('#mainSearch').val().length>0) {
+          params.push('q=' + $('#mainSearch').val());
+        }
+        
+
+        //add sort
+        params.push('order=' + $('#selectOrder option:selected').val());
+          
+        newURL += params.join('&');
+
+        window.location = newURL ; 
+  }
 
   $(".remove-resource").on('click', function(e) {
     $(this).closest('.resource-group').slideUp('fast',function() {

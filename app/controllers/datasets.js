@@ -31,19 +31,20 @@ exports.index = function (req, res){
   var page = (req.query.page > 0 ? req.query.page : 1) - 1;
   var perPage = 30;
   var q = req.query.q;
-  var order = req.query.order;
+  var sort = req.query.sort;
   var options = {
     perPage: perPage,
     page: page,
-    criteria: q
+    criteria: q,
+    sort: sort
   };
   console.log(options);
   
   //set up group by
   var agg = [
-    {$unwind: "$theme" },
+    {$unwind: "$keyword" },
     {$group: {
-      _id: "$theme",
+      _id: "$keyword",
       count: {$sum: 1}
     }},
     {$sort: { count: -1 } }
@@ -56,17 +57,16 @@ exports.index = function (req, res){
     Dataset.count1(options, function (err, count) {
   
 
-      Dataset.aggregate(agg, function(err, categories){
-        console.log(categories);
+      Dataset.aggregate(agg, function(err, tags){
+        console.log(tags);
         res.render('datasets/index', {
-          // categories: categories
           datasets: datasets,
           page: page + 1,
           pages: Math.ceil(count / perPage),
           count: count,
           q: q,
-          categories: categories,
-          order: order
+          tags: tags,
+          sort: sort
         });
       });
       

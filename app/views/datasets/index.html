@@ -15,12 +15,12 @@
 
       <ul class="list-group">
         <li class="list-group-item active"> 
-          <strong>Categories</strong>
+          <strong>Tags</strong>
         </li>
-        {% for category in categories %}
+        {% for tag in tags %}
         <li class="list-group-item">
-          <span class="badge">{{category.count}}</span>
-          {{category._id}}
+          <span class="badge">{{tag.count}}</span>
+          {{tag._id}}
         </li>
         {% endfor %}
       </ul>
@@ -53,12 +53,12 @@
  
               <div class="form-group text-right">
                
-                  <label for="selectOrder">Order By</label>
-                  <select id="selectOrder" name="selectbasic" class="form-control" onchange="buildParams()">
-                    <option value="relevance" {% if (order=='relevance') %} selected {% endif %}>Relevance</option>
-                    <option value="nameAsc" {% if (order=='nameAsc') %} selected {% endif %}>Name Ascending</option>
-                    <option value="nameDesc" {% if (order=='nameDesc') %} selected {% endif %}>Name Descending</option>
-                    <option value="lastModified" {% if (order=='lastModified') %} selected {% endif %}>Last Modified</option>
+                  <label for="selectSort">Sort By</label>
+                  <select id="selectSort" name="selectbasic" class="form-control" onchange="buildParams()">
+                <!--     <option value="relevance" {% if (sort=='relevance') %} selected {% endif %}>Relevance</option> -->
+                    <option value="titleAsc" {% if (sort=='titleAsc') %} selected {% endif %}>Title Ascending</option>
+                    <option value="titleDesc" {% if (sort=='titleDesc') %} selected {% endif %}>Title Descending</option>
+                    <option value="lastModified" {% if (sort=='lastModified') %} selected {% endif %}>Last Modified</option>
                   </select>
            
                  

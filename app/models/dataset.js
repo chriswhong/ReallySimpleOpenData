@@ -57,7 +57,7 @@ var DatasetSchema = new Schema({
     description: {type: String, default : '', trim : true},
     title: {type: String, default : '', trim : true}
   }],
-  theme: [String]
+  theme: [{type: String, default : '', trim : true}]
 });
 
 /**
@@ -124,12 +124,32 @@ DatasetSchema.statics = {
     var regex = new RegExp(criteria, 'i');
     console.log(regex);
     this.find()
-      .or([{ 'title': { $regex: regex }}, { 'description': { $regex: regex }}])
+      .or([{ 'title': { $regex: regex }}, { 'description': { $regex: regex }},{ 'keyword': { $regex: regex }}])
       .populate('user', 'name username')
-      .sort({'createdAt': -1}) // sort by date
+      .sort(parseSort(options.sort)) // sort by date
       .limit(options.perPage)
       .skip(options.perPage * options.page)
       .exec(cb);
+
+    function parseSort(sort) {
+      
+      switch(sort) {
+          case 'titleAsc':
+              return {'title':1}
+              break;
+          case 'titleDesc':
+              return {'title':-1}
+              break;
+          case 'lastModified':
+              return {'modified':-1}
+              break;
+
+          default:
+              return {'title':1}
+      }
+
+      return sort;
+    }
   },
 
   count1: function (options, cb) {
@@ -139,7 +159,7 @@ DatasetSchema.statics = {
     var regex = new RegExp(criteria, 'i');
     console.log(regex);
     this.count()
-      .or([{ 'title': { $regex: regex }}, { 'description': { $regex: regex }}])
+      .or([{ 'title': { $regex: regex }}, { 'description': { $regex: regex }},{ 'keyword': { $regex: regex }}])
       .exec(cb);
   }
 }

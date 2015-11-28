@@ -17,10 +17,10 @@
         <li class="list-group-item active"> 
           <strong>Tags</strong>
         </li>
-        {% for tag in tags %}
-        <li class="list-group-item">
-          <span class="badge">{{tag.count}}</span>
-          {{tag._id}}
+        {% for tagCount in tagCounts %}
+        <li class="list-group-item tag-count-item">
+          <span class="badge">{{tagCount.count}}</span>
+          <span class="tag">{{tagCount._id}}</span>
         </li>
         {% endfor %}
       </ul>
@@ -66,6 +66,18 @@
          
             </form>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="tagFilters">
+           {% if (tags) %}
+            {% for tag in tags %}
+              <div class="tagFilter"><span class="tag">{{tag}}</span> <span class="remove">X</span></div>
+            {% endfor %}
+            {% endif %}
+            </div>
+          </div>
+       
         </div>
         <div class="row" style="border-bottom: 1px dotted rgba(73, 74, 75, 0.23);">&nbsp;</div>
         {% if (datasets.length) %}

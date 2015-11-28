@@ -225,3 +225,12 @@ button.error:focus {
  
     background-color: #2155BA;
 }
+
+li.list-group-item.tag-count-item:hover {
+  background-color: #F5F5F5;
+  cursor: pointer;
+}
+
+.tagFilter .remove:hover {
+  cursor: pointer;
+}

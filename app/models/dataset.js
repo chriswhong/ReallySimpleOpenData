@@ -118,12 +118,20 @@ DatasetSchema.statics = {
    */
 
   list: function (options, cb) {
-    var criteria = options.criteria || {}
+    var criteria = options.criteria || {};
+    var tags = options.tags;
 
     console.log(criteria);
     var regex = new RegExp(criteria, 'i');
+    var regex1 = new RegExp(tags,'i');
     console.log(regex);
-    this.find()
+    var query = this.find();
+
+    if(tags) {
+      query.where('keyword').in(tags)
+    }
+    
+    query
       .or([{ 'title': { $regex: regex }}, { 'description': { $regex: regex }},{ 'keyword': { $regex: regex }}])
       .populate('user', 'name username')
       .sort(parseSort(options.sort)) // sort by date
@@ -153,13 +161,19 @@ DatasetSchema.statics = {
   },
 
   count1: function (options, cb) {
-    var criteria = options.criteria || {}
+    var criteria = options.criteria || {};
+    var tags = options.tags;
 
     console.log(criteria);
     var regex = new RegExp(criteria, 'i');
+    var regex1 = new RegExp(tags,'i');
     console.log(regex);
-    this.count()
-      .or([{ 'title': { $regex: regex }}, { 'description': { $regex: regex }},{ 'keyword': { $regex: regex }}])
+    var query = this.count();
+
+    if(tags) {
+      query.where('keyword').in(tags)
+    }
+      query.or([{ 'title': { $regex: regex }}, { 'description': { $regex: regex }},{ 'keyword': { $regex: regex }}])
       .exec(cb);
   }
 }

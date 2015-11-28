@@ -31,14 +31,37 @@
         //add sort
         params.push('sort=' + $('#selectSort option:selected').val());
           
+
+        //add tags
+        $('.tagFilter').each(function() {
+          params.push('tags=' + $(this).find('.tag').text());
+        })
+
+
         newURL += params.join('&');
 
         window.location = newURL ; 
+
+
+
   }
+
+
+
+  $('.tag-count-item').on('click', function() {
+    $('.tagFilters').append('  <div class="tagFilter"><span class="tag">' + $(this).find('.tag').text() + '</span> <span class="remove">X</span></div>');
+    buildParams();
+  })
+
+  $('.tagFilter').find('.remove').on('click', function() {
+    $(this).parent().remove();
+     buildParams();
+  })
 
   $(".remove-resource").on('click', function(e) {
     $(this).closest('.resource-group').slideUp('fast',function() {
       $(this).remove();
+
     });
   });
 

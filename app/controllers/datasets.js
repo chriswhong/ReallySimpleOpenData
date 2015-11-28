@@ -28,15 +28,21 @@ exports.load = function (req, res, next, id){
  */
 
 exports.index = function (req, res){
+  console.log('tags',req.query.tags);
   var page = (req.query.page > 0 ? req.query.page : 1) - 1;
   var perPage = 30;
   var q = req.query.q;
   var sort = req.query.sort;
+  var tags = req.query.tags;
+  if (typeof tags == 'string') {
+    tags = [tags];
+  }
   var options = {
     perPage: perPage,
     page: page,
     criteria: q,
-    sort: sort
+    sort: sort,
+    tags: tags
   };
   console.log(options);
   
@@ -47,17 +53,19 @@ exports.index = function (req, res){
       _id: "$keyword",
       count: {$sum: 1}
     }},
-    {$sort: { count: -1 } }
+    {$sort: { count: -1 } },
+    {$limit: 15}
   ];
 
   
 
   Dataset.list(options, function (err, datasets) {
+    // console.log('List found ',datasets.length)
     if (err) return res.render('500');
     Dataset.count1(options, function (err, count) {
   
 
-      Dataset.aggregate(agg, function(err, tags){
+      Dataset.aggregate(agg, function(err, tagCounts){
         console.log(tags);
         res.render('datasets/index', {
           datasets: datasets,
@@ -66,6 +74,7 @@ exports.index = function (req, res){
           count: count,
           q: q,
           tags: tags,
+          tagCounts: tagCounts,
           sort: sort
         });
       });

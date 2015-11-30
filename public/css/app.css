@@ -234,3 +234,7 @@ li.list-group-item.tag-count-item:hover {
 .tagFilter .remove:hover {
   cursor: pointer;
 }
+
+.pager {
+  margin: 0;
+}

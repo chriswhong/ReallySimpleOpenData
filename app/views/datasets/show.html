@@ -1,39 +1,78 @@
 {% extends '../layouts/default.html' %}
 
-{% block main %}
-
-{% endblock %}
 
 {% block content %}
-  {% if (req.isAuthenticated()) %}
-    <a href="{{ '/datasets/' + dataset._id + '/edit' }}" title="edit" class="btn btn-success">
-        Manage
-    </a>
-  {% endif %}
-  <h2>{{ dataset.title }}</h2>
-  <p>{{ dataset.description }}</p>
+<ol class="breadcrumb">
+  Datasets / {{title}}
+</ol>
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
-    <h3>Data and Resources</h3>
-      {% for resource in dataset.distribution %}
-        <div class="row">
-          <div class="col-md-10">
-          File ({{ resource.mediaType }})
-          </div>
-          <div class="col-md-2">
-            <a href="{{resource.downloadURL }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Download</button></a>
-          </div>
-        </div>
-      {% endfor %}
-      <div class="meta">
-        
- 
-      </div>
+    <div class="col-md-3">
     </div>
-    <div class="col-md-4">
- 
+    <div class="col-md-9">
+      {% if (req.isAuthenticated()) %}
+      <a href="{{ '/datasets/' + dataset._id + '/edit' }}" title="edit" class="btn btn-success">
+      Manage
+      </a>
+      {% endif %}
+      <h2>{{ dataset.title }}</h2>
+      <p>{{ dataset.description }}</p>
+      <div class="row">
+        <div class="col-md-12">
+        <h3>Data and Resources</h3>
+          {% for resource in dataset.distribution %}
+            <div class="row">
+              <div class="col-md-10">
+              File ({{ resource.mediaType }})
+              </div>
+              <div class="col-md-2">
+                <a href="{{resource.downloadURL }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Download</button></a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="well well-sm">  
+          <ul class="pager">
+          {% for tag in dataset.keyword %} 
+          <li><a href="../datasets?tags={{tag}}">{{tag}}</a></li>
+          {% endfor %}
+          </ul>
+        </div>
+         
+        <div class="meta">
+          
+
+        </div>
+      </div>
+        <div class="row">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>Created</th>
+                <th>{{dataset.issued|date('F jS, Y')}}</th>
+              </tr>
+              <tr>
+                <th>Modified</th>
+                <th>{{dataset.modified|date('F jS, Y')}}</th>
+              </tr>
+              <tr>
+                <th>Publisher</th>
+                <th>{{dataset.publisher.name}}</th>
+              </tr>
+              <tr>
+                <th>Point of Contact</th>
+                <th>{{dataset.contactPoint.fn}}: {{dataset.contactPoint.hasEmail}}</th>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      
     </div>
   </div>
+</div>
+ 
 
  <!--  <form action="{{ '/datasets/' + dataset.id }}" method="post" onsubmit="return confirm('Are you sure?')">
     <br>
@@ -45,11 +84,11 @@
     <input type="hidden" name="_method" value="DELETE">
     <button class="btn btn-danger" type="submit">Delete</button>
   </form> -->
-
+<!-- 
   <br>
   <h3>Comments</h3>
   {% for comment in dataset.comments %}
     {% include '../comments/comment.html' %}
   {% endfor %}
-  {% include '../comments/form.html' %}
+  {% include '../comments/form.html' %} -->
 {% endblock %}

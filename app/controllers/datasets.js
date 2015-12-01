@@ -121,7 +121,6 @@ exports.create = function (req, res) {
 
 exports.edit = function (req, res) {
   res.render('datasets/edit', {
-    title: 'Edit ' + req.dataset.title,
     dataset: req.dataset
   });
 };

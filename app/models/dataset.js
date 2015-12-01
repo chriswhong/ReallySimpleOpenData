@@ -51,11 +51,11 @@ var DatasetSchema = new Schema({
   landingPage: {type: String, default : '', trim : true},
   issued: {type : Date, default : Date.now},
   distribution: [{
+    name: {type: String, default : '', trim : true},
+    description: {type: String, default : '', trim : true},
     downloadURL: {type: String, default : '', trim : true},
     accessURL: {type: String, default : '', trim : true},
-    mediaType: {type: String, default : '', trim : true},
-    description: {type: String, default : '', trim : true},
-    title: {type: String, default : '', trim : true}
+    mediaType: {type: String, default : '', trim : true}
   }],
   theme: [{type: String, default : '', trim : true}]
 });

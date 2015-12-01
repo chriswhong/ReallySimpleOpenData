@@ -1,9 +1,5 @@
 {% extends '../layouts/default.html' %}
 
-{% block main %}
-  <h1>{{ title }}</h1>
-  <hr>
-{% endblock %}
 
 {% block content %}
   {% if dataset.isNew %}
@@ -12,90 +8,104 @@
     {% set action = '/datasets/' + dataset._id %}
   {% endif %}
 
-  <div class="page-header">
-    <h1>{{title}}</h1>
+<ol class="breadcrumb">
+  Datasets / {{dataset.title}} / edit
+</ol>
+<div class="row">
+  <div class="col-md-3">
+    <h3>Sidebar</h3>
   </div>
-  <div class="row">
-    <div class="col-md-8">
-      <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal" id="myform">
+  <div class="col-md-9">
+  <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal" id="myform">
+    <div class="panel with-nav-tabs panel-primary">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#sectionA">Metadata</a></li>
+          <li><a data-toggle="tab" href="#sectionB">Resources</a></li>
+        </ul>
+      </div>
+    <div class="panel-body">
+      <div class="tab-content">
+        <div class="row tab-pane fade in active" id="sectionA">
+          <div class="col-md-12 ">
+            
 
-        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+              <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 
-        {% if not dataset.isNew %}
-          <input type="hidden" name="_method" value="PUT">
-        {% endif %}
+              {% if not dataset.isNew %}
+              <input type="hidden" name="_method" value="PUT">
+              {% endif %}
 
-        <div class="panel panel-default">
-          <div class="panel-heading"><h3 class="panel-title">Metadata</h3></div>
-          <div class="panel-body">
+    
 
-            <div class="form-group">
-              <label for="title" class="col-sm-2 control-label">Title</label>
-              <div class="col-sm-10">
-                <input type="text" name="title" value="{{ dataset.title }}" placeholder="Enter the title" class="form-control" id="title">
+              <div class="form-group">
+                <label for="title" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" name="title" value="{{ dataset.title }}" placeholder="Enter the title" class="form-control" id="title">
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="description" class="col-sm-2 control-label">Description</label>
-              <div class="col-sm-10">
-                <textarea rows="5" name="description" placeholder="Enter the dataset description" id="description" cols="30" rows="10" class="form-control">{{ dataset.description }}</textarea>
+              <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                  <textarea rows="5" name="description" placeholder="Enter the dataset description" id="description" cols="30" rows="10" class="form-control">{{ dataset.description }}</textarea>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="tags" class="col-sm-2 control-label">Tags</label>
-              <div class="col-sm-10">
-                <input type="text" name="keyword" value="{{ dataset.keyword }}" placeholder="Enter the tags" class="form-control" id="tags">
+              <div class="form-group">
+                <label for="tags" class="col-sm-2 control-label">Tags</label>
+                <div class="col-sm-10">
+                  <input type="text" name="keyword" value="{{ dataset.keyword }}" placeholder="Enter the tags" class="form-control" id="tags">
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="license" class="col-sm-2 control-label">License</label>
-              <div class="col-sm-10">
-                <select class="form-control" name="license">
-                  <option>Public Domain</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
+              <div class="form-group">
+                <label for="license" class="col-sm-2 control-label">License</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="license">
+                    <option>Public Domain</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="publisher" class="col-sm-2 control-label">Publisher</label>
-              <div class="col-sm-10">
-                <input type="text" name="publisher.name" value="{{ dataset.publisher.name }}" placeholder="Data Publisher" class="form-control" id="publisher">
+              <div class="form-group">
+                <label for="publisher" class="col-sm-2 control-label">Publisher</label>
+                <div class="col-sm-10">
+                  <input type="text" name="publisher.name" value="{{ dataset.publisher.name }}" placeholder="Data Publisher" class="form-control" id="publisher">
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="contactPoint.fn" class="col-sm-2 control-label">Contact Name</label>
-              <div class="col-sm-10">
-                <input type="text" name="contactPoint.fn" value="{{ dataset.contactPoint.fn }}" placeholder="Contact Name" class="form-control" id="contactPoint.fn">
+              <div class="form-group">
+                <label for="contactPoint.fn" class="col-sm-2 control-label">Contact Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="contactPoint.fn" value="{{ dataset.contactPoint.fn }}" placeholder="Contact Name" class="form-control" id="contactPoint.fn">
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="contactPoint" class="col-sm-2 control-label">Contact Email</label>
-              <div class="col-sm-10">
-                <input type="text" name="contactPoint.hasEmail" value="{{ dataset.contactPoint.hasEmail }}" placeholder="Contact Email" class="form-control">
+              <div class="form-group">
+                <label for="contactPoint" class="col-sm-2 control-label">Contact Email</label>
+                <div class="col-sm-10">
+                  <input type="text" name="contactPoint.hasEmail" value="{{ dataset.contactPoint.hasEmail }}" placeholder="Contact Email" class="form-control">
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <!-- <label for="theme" class="col-sm-2 control-label">Category</label>
-              <div class="col-sm-10">
-                <input type="text" name="theme" value="{{ dataset.theme }}" placeholder="Category" class="form-control" id="theme">
-              </div> -->
-            </div>
-          </div>
-        </div>
-     
-        <div class="panel panel-default resource-panel">
-          <div class="panel-heading"><h3 class="panel-title">Resources</h3></div>
-          <div class="panel-body">
+
+    
+       
+        
+
+      
+      
+    </div>
+
+
+  </div>
+    <div class="row tab-pane fade in" id="sectionB">
+   
             {% for resource in dataset.distribution %}
             <div class="resource-group">
               <div class="form-group">
@@ -140,16 +150,19 @@
               </div>
             </div>
           </div>
-        </div>
-        
+      
+ 
+  </div>  <!-- .tab-content -->
+  </div>
+  </div>
 
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-primary" type="submit">Save</button>
-            &nbsp;
-            
-          </div>
-        </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button class="btn btn-primary" type="submit">Save</button>
+        &nbsp;
+        
+      </div>
+    </div>
 
       </form>
       {% if !dataset.isNew %}
@@ -160,14 +173,6 @@
         <button class="btn btn-danger" type="submit">Delete</button>
       </form> 
       {% endif %}
-    </div>
-
-<!--     <div class="col-md-4">
-      {% if (!article.isNew && article.image && article.image.files && article.image.files.length) %}
-        <img src="{{ article.image.cdnUri + '/mini_' + article.image.files[0] }}" alt="">
-      {% endif %}
-    </div> -->
-  </div>
   
   <script type='text/template' id='resource-template'>
     <div class="resource-group">

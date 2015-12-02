@@ -7,9 +7,7 @@
 // set the NODE_PATH to be ./app/controllers (package.json # scripts # start)
 
 var users = require('users');
-var articles = require('articles');
 var datasets = require('datasets');
-var comments = require('comments');
 var tags = require('tags');
 var auth = require('./middlewares/authorization');
 
@@ -112,11 +110,11 @@ module.exports = function (app, passport) {
   // home route
   app.get('/', datasets.index);
 
-  // comment routes
-  app.param('commentId', comments.load);
-  app.post('/articles/:id/comments', auth.requiresLogin, comments.create);
-  app.get('/articles/:id/comments', auth.requiresLogin, comments.create);
-  app.delete('/articles/:id/comments/:commentId', commentAuth, comments.destroy);
+  // // comment routes
+  // app.param('commentId', comments.load);
+  // app.post('/articles/:id/comments', auth.requiresLogin, comments.create);
+  // app.get('/articles/:id/comments', auth.requiresLogin, comments.create);
+  // app.delete('/articles/:id/comments/:commentId', commentAuth, comments.destroy);
 
   // tag routes
   app.get('/tags/:tag', tags.index);

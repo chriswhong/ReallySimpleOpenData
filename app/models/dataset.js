@@ -36,8 +36,8 @@ var DatasetSchema = new Schema({
   user: {type : Schema.ObjectId, ref : 'User'},
   title: {type: String, default : '', trim : true, index: true},
   description: {type: String, default : '', trim : true, index: true},
-  // keyword: {type: [], get: getTags, set: setTags},
-  keyword: [{type: String, default : '', trim : true}],
+  keyword: {type: [], set: setTags},
+  //keyword: [{type: String, default : '', trim : true}],
   modified: {type : Date, default : Date.now},
   publisher: {
     name: {type: String, default : '', trim : true}
@@ -105,7 +105,7 @@ DatasetSchema.statics = {
   load: function (id, cb) {
     this.findOne({ _id : id })
       .populate('user', 'name email username')
-      .populate('comments.user')
+      //.populate('comments.user')
       .exec(cb);
   },
 

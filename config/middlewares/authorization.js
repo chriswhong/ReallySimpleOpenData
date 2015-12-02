@@ -43,6 +43,7 @@ exports.user = {
 
 exports.dataset = {
   hasAuthorization: function (req, res, next) {
+    console.log(req.user,req.dataset)
     if (req.dataset.user.id != req.user.id) {
       req.flash('info', 'You are not authorized')
       return res.redirect('/datasets/' + req.article.id)

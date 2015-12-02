@@ -30,3 +30,8 @@ People who want to create a searchable, standards-compliant open data catalog sh
 
 ## License 
 - This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+
+##Attribution
+Latest incarnation is largely based on [https://github.com/madhums/node-express-mongoose-demo](https://github.com/madhums/node-express-mongoose-demo)
+
+Catalog UI based on CKAN

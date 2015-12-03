@@ -4,7 +4,7 @@
 
 
 var mongoose = require('mongoose');
-var config = require('config');
+var config = require('./config/config');
 // Connect to mongodb
 var connect = function () {
   var options = { server: { socketOptions: { keepAlive: 1 } } };

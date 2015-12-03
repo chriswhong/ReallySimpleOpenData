@@ -5,7 +5,7 @@
 
 var mongoose = require('mongoose');
 var Imager = require('imager');
-var config = require('config');
+var config = require('../../config/config');
 
 var imagerConfig = require(config.root + '/config/imager.js');
 var utils = require('../../lib/utils');

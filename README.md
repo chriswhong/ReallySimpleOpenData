@@ -23,10 +23,17 @@ People who want to create a searchable, standards-compliant open data catalog sh
 - Design Help
 
 ## Try it out - No guarantees at this point, it's very much in-progress
-- Clone this repo
-- Start MongoDB
+- Clone this repo `git clone https://github.com/chriswhong/ReallySimpleOpenData.git`
+- Start MongoDB (`mongod` on a Mac)
 - Install dependencies `npm install`
 - Run reallysimpleopendata `npm start`
+- Open `http://localhost:3000` in your browser
+- Create a new user account and start adding datasets
+
+###To populate with dummy data
+
+- read `scripts/README.md` for configuration details on how to execute insert.js to populate the DB with datasets from Baltimore 
+
 
 ## License 
 - This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).

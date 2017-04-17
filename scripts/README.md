@@ -1,4 +1,4 @@
-##insert.js
+## insert.js
 Populates the db with data.json from data.baltimorecity.gov
 
 - Make sure you have a valid user in the db

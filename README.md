@@ -13,7 +13,7 @@ A no-frills open data portal built with node, express,and mongodb.
 ## Vision
 People who want to create a searchable, standards-compliant open data catalog should be able to get started in just a few minutes for free.
 
-##Data
+## Data
 - All data are stored *elsewhere*.  The user can paste in a link and choose the correct resource type.
 - One idea is to automate the use of third party services.  (put in your Amazon S3 key and RSOD will retain it and give you a UI for uploading files when you create a dataset.  Same for CartoDB, Github, generic FTP server, etc.  RSOD can act as broker for the upload, but never hosts the data itself.)
 
@@ -30,7 +30,7 @@ People who want to create a searchable, standards-compliant open data catalog sh
 - Open `http://localhost:3000` in your browser
 - Create a new user account and start adding datasets
 
-###To populate with dummy data
+### To populate with dummy data
 
 - read `scripts/README.md` for configuration details on how to execute insert.js to populate the DB with datasets from Baltimore 
 
@@ -38,7 +38,7 @@ People who want to create a searchable, standards-compliant open data catalog sh
 ## License 
 - This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
-##Attribution
+## Attribution
 Latest incarnation is largely based on [https://github.com/madhums/node-express-mongoose-demo](https://github.com/madhums/node-express-mongoose-demo)
 
 Catalog UI based on CKAN
